@@ -105,7 +105,7 @@ function startRender() {// Change viewer size
     //skinViewer.loadBackground("../assets/images/panorama.png");
     
     // Set the background to a panoramic image
-    skinViewer.loadPanorama("../assets/images/panorama.png");
+    skinViewer.loadPanorama("https://raw.githubusercontent.com/AlonsoAliaga/mc-renders/main/assets/images/panorama.png");
     
     // Change camera FOV
     skinViewer.fov = 70;
