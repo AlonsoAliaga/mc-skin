@@ -68,7 +68,7 @@ function updateLandscape() {
     let landscape = document.getElementById("button-toggle-landscape").checked;
     console.log(landscape)
     if(landscape) {
-      skinViewer.loadPanorama("https://raw.githubusercontent.com/AlonsoAliaga/mc-renders/main/assets/images/panorama.png");
+      skinViewer.loadPanorama("https://raw.githubusercontent.com/AlonsoAliaga/mc-skin/main/assets/images/panorama.png");
     }else{
       skinViewer.background = document.getElementById("bg-color-picker").value;
     }
@@ -105,7 +105,7 @@ function startRender() {// Change viewer size
     //skinViewer.loadBackground("../assets/images/panorama.png");
     
     // Set the background to a panoramic image
-    skinViewer.loadPanorama("https://raw.githubusercontent.com/AlonsoAliaga/mc-renders/main/assets/images/panorama.png");
+    skinViewer.loadPanorama("https://raw.githubusercontent.com/AlonsoAliaga/mc-skin/main/assets/images/panorama.png");
     
     // Change camera FOV
     skinViewer.fov = 70;
