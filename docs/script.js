@@ -68,7 +68,7 @@ function updateLandscape() {
     let landscape = document.getElementById("button-toggle-landscape").checked;
     console.log(landscape)
     if(landscape) {
-      skinViewer.loadPanorama("../assets/images/panorama.png");
+      skinViewer.loadPanorama("https://raw.githubusercontent.com/AlonsoAliaga/mc-renders/main/assets/images/panorama.png");
     }else{
       skinViewer.background = document.getElementById("bg-color-picker").value;
     }
