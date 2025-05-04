@@ -2170,7 +2170,7 @@ const defaultGradients = {
       let animationData = availableAnimations[animationType];
       let element = document.createElement("div");
       element.classList.add("render-card");
-      let link = animationData.image.startsWith("http") ? animationData.image : `https://raw.githubusercontent.com/AlonsoAliaga/mc-skin/main/assets/images/animations/${animationType}`;
+      let link = animationData.image.startsWith("http") ? animationData.image : `https://raw.githubusercontent.com/AlonsoAliaga/mc-skin/main/assets/images/animations/${animationType}.gif`;
       element.innerHTML = `<img src="${link}" alt="${animationData.name} Model">
                 <div class="render-label">${animationData.name}</div>`
       element.onclick = function(){selectAnimation(animationType)}
