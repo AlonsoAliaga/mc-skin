@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="shortcut icon" href="https://cdn.discordapp.com/emojis/791742603183259648.webp?size=96&quality=lossless" type="image/x-icon">
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  
+    <title>Minecraft Renders | AlonsoAliaga Development</title>
+    
+    <meta name="theme-color" content="#9a14ff"/>
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Minecraft Renders by AlonsoAliaga" />
+    <meta property="og:title" content="Minecraft Renders | AlonsoAliaga Development">
+    <meta property="og:image" content="https://raw.githubusercontent.com/AlonsoAliaga/mc-renders/main/assets/images/renders/mojavatar.png">
+    <meta property="og:description" content="Create cool Minecraft renders with your skin. Many options available. No more paying fiverr artists!">
+    <meta property="og:url" content="https://alonsoaliaga.github.io/index.html">
+  </head>
+  <script src="https://cdn.jsdelivr.net/npm/skinview3d@3.2.0/bundles/skinview3d.bundle.min.js"></script>
+  <body onload="loadCounter(); checkSite(window); ">
+    <div id="maintenance-overlay" style="display: flex;">
+      <div class="overlay-content">
+        <img src="https://raw.githubusercontent.com/AlonsoAliaga/mc-renders/main/assets/images/renders/mojavatar.png">
+        <br>
+        <h1>🚧 Site Under Construction</h1>
+        <p>We'll be back shortly. Thank you for your patience.</p>
+      </div>
+    </div>
+    <div class="content">
+      <div class="header">
+        <h1 style="font-family: MinecraftBold;"><a href="https://alonsoaliaga.com/mc-renders" rel="noopener" target="_blank">MC Render</a> Generator</h1>
+        <h2 style="font-size: 20px; color: rgb(255, 71, 71)">Use Google Chrome or Opera for a better experience. Edge is reported as not compatible!</h2>
+        <div class="options" style="padding: 10px 10px 10px 10px; margin-bottom: 10px;">
+          <h2 class="rainbow" style="font-size:25px; color:transparent">How is this different from other generators?</h2>
+          This generator allows you to create access multiple type of renders with <b class="rainbow">many</b> cool options.<br><br>
+          <h2 style="font-size: 20px; color: rgb(255, 71, 71)">No more paying fiverr artits for your renders!</h2>
+          <span style="font-size: 17px;">
+            <b>⚠️ If you have cool ideas, suggest them in our <a href="https://alonsoaliaga.com/discord" rel="noopener" target="_blank">official discord server.</a></b><br>
+          </span>
+        </div>
+        <span id="snackbar"><b>💎 Successfully Copied! 💎</b><br><span style="font-size: small;">Thanks for using our tool!</span></span>
+        <span style="font-family: MinecraftBold;">Site options:</span>
+        <div id="appearance" style="display: inline-block;font-family: MinecraftBold;padding: 5px 10px 5px 10px;" class="darkbuttonboxes">
+          <input type="checkbox" checked id="darkmode" onclick="toggleDarkmode();"></input>
+          <label for="darkmode" style="margin-bottom: 0px;margin-top: 0px;"> Dark Mode 👁‍🗨</label>
+        </div><br><br>
+        <h2>Enter your username:</h2>
+        <div id="inputTextDiv" style="flex-direction: row; text-align: center; align-items: center;">
+          <input id="inputText" style="text-align: center; display: inline-block; width: 300px;height: 70px; margin-right: 5px;font-family: MinecraftBold;padding: 15px 20px 15px 20px;"
+            type="text" maxlength="20" checked id="darkmode" value="AlonsoAliaga" class="darkbuttonboxes" 
+            placeholder="Type your username"></input>
+          <button id="customskindiv" style="position:absolute;text-align: center;display: inline-block;font-family: MinecraftBold;padding: 15px 20px 15px 20px;" 
+            class="darkbuttonboxes" onclick="uploadCustomSkinTexture(this)">Custom<br>Skin</button>
+        </div>
+        <span id="snackbar-error">Loading error..</span>
+        <input id="inputTextCooldown" style="text-align: center; color:gray; display: none; width: 300px; height: 70px; font-family: MinecraftBold; padding: 15px 20px 15px 20px; margin-bottom: 20px;"
+          type="text" maxlength="20" checked id="darkmode" value="AlonsoAliaga" class="darkbuttonboxes"
+          placeholder="Type your username" disabled="true"></input>
+        <br>
+            <canvas id="skin_container"></canvas>
+            <br>
+            <br>
+      </div>
+      <div>
+        <fieldset class="group" style="padding: 0px;"> 
+          <legend id="thelegend">&nbsp;&nbsp;&nbsp;Select your options 🎮&nbsp;&nbsp;&nbsp;</legend> 
+          <ul id="fonts-table" style="font-size: 18px;">
+            <div id="button-toggle-cape-div" style="width: 50%;display: inline-block;font-family: MinecraftBold;margin: 0px 2px 2px 2px;padding: 5px 10px 5px 10px;" class="darkbuttonboxes">
+              <input type="checkbox" id="button-toggle-cape" onclick="function toggleCape() {
+                
+              }
+              toggleCape();"></input>
+              <label for="button-toggle-cape" style="margin-bottom: 0px;margin-top: 0px;margin-left: 0px;margin-right: 10px;"> Show cape 🪽</label>
+            </div><br>
+
+            Speed: 
+            <button class="button-small" style="display: inline;margin: 10px;vertical-align: middle" onclick="function modify(event) {
+                document.getElementById('speed').innerText = Math.min(100,parseInt(+document.getElementById('speed').innerText * 10) - ((event.altKey ||  event.shiftKey) ? 2 : 1)) / 10;
+            }
+            modify(event);updateSpeed();">⯇</button>
+            <button class="darkbuttonboxes" id="speed" style="font-size: 20px;width: 100px;height: 50px;display: inline;margin: 10px;vertical-align: middle;border-color: rgb(97, 97, 97);border-style: solid;border-width: 2px;" id="icon-canvas">0.5</button>
+            <button class="button-small" style="display: inline;margin: 10px;vertical-align: middle" onclick="function modify(event) {
+                document.getElementById('speed').innerText = Math.min(100,parseInt(+document.getElementById('speed').innerText * 10) + ((event.altKey ||  event.shiftKey) ? 2 : 1)) / 10;
+            }
+            modify(event);updateSpeed();">⯈</button><br>
+
+            <fieldset class="group" style="padding: 0px 15px 0px 15px;margin: 0px 85px 0px 85px;"> 
+                <legend id="thelegend">&nbsp;&nbsp;&nbsp;Skin options 👑&nbsp;&nbsp;&nbsp;</legend>
+                    <h2 style="font-size: 25px;">Outer Layer</h2>
+                    <div id="outlayer-div">
+                    </div><br>
+                    <h2 style="font-size: 25px;">Inner Layer</h2>
+                    <div id="inlayer-div">
+                    </div>
+                <br>
+            </fieldset><br>
+            <div id="button-landscape-skin-div" style="width: 50%;display: inline-block;font-family: MinecraftBold;margin: 0px 2px 2px 2px;padding: 5px 10px 5px 10px;" class="darkbuttonboxes">
+              <input type="checkbox" id="button-toggle-landscape" onclick="function toggleBgColor(a){
+                if(a.checked) {
+                  document.getElementById('bg-color-picker-div').style.display = 'none';
+                }else{
+                  document.getElementById('bg-color-picker-div').style.display = null;
+                }
+              };
+              toggleBgColor(this);
+              updateLandscape();" checked></input>
+              <label for="button-toggle-landscape" style="margin-bottom: 0px;margin-top: 0px;margin-left: 0px;margin-right: 10px;"> Toggle landscape 🖼️</label>
+            </div><br>
+            <fieldset id="bg-color-picker-div" class="group" style="display: none;padding: 5px 15px 5px 15px;margin: 0px 85px 0px 85px;"> 
+              Background color:<br>
+              <div style="width: 50%;display: inline-block;font-family: MinecraftBold;margin: 0px 2px 2px 2px;padding: 5px 10px 5px 10px;" class="darkbuttonboxes">
+                <input type="color" id="bg-color-picker" onchange="updateLandscape();"></input>
+                <label for="bg-color-picker" style="margin-bottom: 0px;margin-top: 0px;margin-left: 0px;margin-right: 10px;"> Pick your color 🎨</label>
+              </div>
+            </fieldset>
+            <div id="button-remove-watermark-download-div" style="width: 50%;display: inline-block;font-family: MinecraftBold;margin: 2px 2px 2px 2px;padding: 5px 10px 5px 10px;" class="darkbuttonboxes">
+              <input type="checkbox" name="button-remove-watermark-download" id="button-remove-watermark-download" onclick="toggleWatermark(this);"></input>
+              <label for="button-remove-watermark-download" style="margin-bottom: 0px;margin-top: 0px;margin-left: 0px;margin-right: 10px;"> Remove watermark in download? 👓</label>
+            </div><br>
+          </ul> 
+        </fieldset><br>
+      </div>
+      
+      <div>
+        <fieldset style="padding: 15px 15px 15px 15px;"> 
+          <legend id="thelegend">&nbsp;&nbsp;&nbsp;Select your Animation 🎲&nbsp;&nbsp;&nbsp;</legend> 
+          <div id="animations-cards" class="group button-container">
+          </div>
+          <br>
+        </fieldset>
+      </div>
+      <br>
+      <div id="download-all" style="display: inline-block;font-family: MinecraftBold;padding: 5px 10px 5px 10px;" class="darkbuttonboxes">
+        <input type="button" style="outline: none; display: none;" checked id="downloadall" onclick="downloadProfile();"></input>
+        <label id="download-all-label" for="downloadall" style="margin-bottom: 0px;margin-top: 0px;margin-left: 20px;;margin-right: 15px;"> Download your Minecraft Render with watermark 📥</label>
+      </div>
+      <br>
+      <br>
+      <div style="display: inline-flex;">
+        <div id="pixel-showcase-div" class="center-container">
+          <fieldset class="group" style="padding: 0px;width: 26%;align-content: center;"> 
+            <legend id="thelegend" style="padding-right: 0px;">&nbsp;&nbsp;&nbsp;Looking for a profile&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;picture like this one? 💎&nbsp;&nbsp;&nbsp;</legend> 
+            <canvas id="test" width="300px" height="300px" style="width: 250px;padding-bottom: 0px;cursor: pointer;" onclick="window.open('https://alonsoaliaga.com/mcpfp', '_blank');"></canvas>
+          </fieldset>
+        </div>
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <div id="render-showcase-div" class="center-container">
+          <fieldset class="group" style="padding: 0px;width: 26%;align-content: center;"> 
+            <legend id="thelegend" style="padding-right: 0px;">&nbsp;&nbsp;&nbsp;Looking for a render&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;like this one? 💎&nbsp;&nbsp;&nbsp;</legend> 
+            <canvas id="render-test" width="300px" height="300px" style="width: 250px;padding-bottom: 0px;cursor: pointer;" onclick="window.open('https://alonsoaliaga.com/mc-renders', '_blank');"></canvas>
+          </fieldset>
+        </div>
+      </div>
+      <br>
+      <br>
+      <div class="options">
+        <div style="font-size: 18px ;padding-top: 0px;padding-bottom: 0px; font-family: MinecraftRegular;" class="examples">
+          <h2 style="font-size: 18px; font-family: MinecraftBold;">More tools for you:</h2>
+          <div style="text-align: left;font-size: 20px;" id="tools-for-you">
+          </div>
+          <br>
+          <h2 style="color: transparent;font-size: 18px ;text-align: center; font-family: MinecraftBold;"><a href="https://alonsoaliaga.github.io" rel="noopener" target="_blank">AlonsoAliaga Development</a></h2>
+        </div>
+      </div>
+      <br>
+      <h2 style="font-size: 15px ;text-align: center;">Huge thanks to <a href="https://lunareclipse.studio" rel="noopener" target="_blank">LunarEclipse</a> for his endpoint which is used in this site.</h2>
+      <br>
+      <!-- <div id="mybutton">
+        <button class="buttonface"><a href="https://alonsoaliaga.github.io"><img src="https://raw.githubusercontent.com/AlonsoAliaga/alonsoaliaga.github.io/main/assets/img/apple-touch-icon.png"></a></button>
+      </div> -->
+      <div id="mybutton">
+        <div style="position: center;display: inline-block;">
+          <button class="buttonface"><a href="https://alonsoaliaga.github.io"><img src="https://raw.githubusercontent.com/AlonsoAliaga/alonsoaliaga.github.io/main/assets/img/apple-touch-icon.png"></a></button>
+          <br>
+          <div id="visitor-counter" style="text-align: center;">
+            <span id="counter-amount" style="font-family: MinecraftBold;font-weight: bold;">Visits: 0</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <script src="jquery-1.6.1.min.js"></script> -->
+  <script src="script.js"></script>
+  <!-- <script src="script.js"></script> -->
+
+  </body>
+</html>
