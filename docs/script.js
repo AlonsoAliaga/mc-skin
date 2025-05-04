@@ -2037,7 +2037,7 @@ const defaultGradients = {
    let href = window.location.href;
    if(!href.includes(atob("YWxvbnNvYWxpYWdhLmdpdGh1Yi5pbw=="))) return;
    let link = atob("aHR0cHM6Ly9hbG9uc29hbGlhZ2EtcGFnZS1jb3VudC5nbGl0Y2gubWUvY291bnRlcj9zaXRlPTxzaXRlPiZrZXk9PGtleT4=")
-    .replace(/<site>/g,"mc-renders").replace(/<key>/g,"KEY-A");
+    .replace(/<site>/g,"mc-skin").replace(/<key>/g,"KEY-A");
    let counter = document.getElementById("visitor-counter");
    if(counter) {
      $.ajax({
