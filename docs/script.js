@@ -2312,7 +2312,6 @@ const defaultGradients = {
     globalModelsLock = true;
     for(let card of cards) {
       if(card.classList.contains('locked')) return;
-      console.log(`M Seconds ${seconds}`);
       let seconds = secs;
       console.log(`M Seconds ${seconds}`);
       card.classList.add('locked');
