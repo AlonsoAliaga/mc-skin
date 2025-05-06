@@ -75,6 +75,7 @@ function updateLandscape() {
 }
 function selectAnimation(animationType) {
     if(availableAnimations[animationType]) {
+        if(globalModelsLock) return;
         skinViewer.animation = availableAnimations[animationType].animation;
         lockAnimations(undefined,5);
     }
