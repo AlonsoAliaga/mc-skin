@@ -2318,7 +2318,7 @@ const defaultGradients = {
     for(let card of cards) {
       if(card.classList.contains('locked')) return;
       let seconds = secs;
-      console.log(`M Seconds ${seconds}`);
+      //console.log(`M Seconds ${seconds}`);
       card.classList.add('locked');
       const ov = document.createElement('div');
       ov.className = 'overlay';
