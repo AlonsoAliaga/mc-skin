@@ -66,7 +66,7 @@ function updateSpeed() {
 }
 function updateLandscape() {
     let landscape = document.getElementById("button-toggle-landscape").checked;
-    console.log(landscape)
+    //console.log(landscape)
     if(landscape) {
       skinViewer.loadPanorama("https://raw.githubusercontent.com/AlonsoAliaga/mc-skin/main/assets/images/panorama.png");
     }else{
@@ -76,7 +76,7 @@ function updateLandscape() {
 function selectAnimation(animationType) {
     if(availableAnimations[animationType]) {
         skinViewer.animation = availableAnimations[animationType].animation;
-        lockAnimations(5);
+        lockAnimations(undefined,5);
     }
 }
 function startRender() {// Change viewer size
@@ -860,7 +860,6 @@ const defaultGradients = {
       }catch(e){}
     }
     setTimeout(()=>{
-      return;
       let href = window.location.href;
       if(!href.includes(atob("YWxvbnNvYWxpYWdhLmdpdGh1Yi5pbw=="))) {
         try{document.title = `Page stolen from https://${atob("YWxvbnNvYWxpYWdhLmdpdGh1Yi5pbw==")}`;}catch(e){}
@@ -1303,11 +1302,11 @@ const defaultGradients = {
           const response = await fetch(`https://api.minetools.eu/uuid/${username}`);
           const parsed = await response.json();
           /*
-          console.log(content);
+          //console.log(content);
           const decoded = atob(content.content);
           const parsed = JSON.parse(decoded);
           */
-          console.log(parsed);
+          //console.log(parsed);
           lastUsernameToUUID = parsed.name;
           lastObtainedUUID = parsed.id;
           cacheUserUUID.set(parsed.name.toLowerCase(),parsed.id);
@@ -2172,7 +2171,7 @@ const defaultGradients = {
       element.classList.add("render-card");
       let link = animationData.image.startsWith("http") ? animationData.image : `https://raw.githubusercontent.com/AlonsoAliaga/mc-skin/main/assets/images/animations/${animationType}.gif`;
       element.innerHTML = `<img src="${link}" alt="${animationData.name} Model">
-                <div class="render-label">${animationData.name}</div>`
+                <div style="margin-top:-5px;font-size:20px;font-weight:bold;" class="render-label">${animationData.name}</div>`
       element.onclick = function(){selectAnimation(animationType)}
       if(animationData.custom) {
         toAddCustom.push(element);
@@ -2306,8 +2305,13 @@ const defaultGradients = {
     });
   }
   loadListener();
-  function lockAnimations(secs, iconUrl='https://raw.githubusercontent.com/AlonsoAliaga/mc-renders/main/assets/images/lock-icon.png') {
-    let cards = document.querySelectorAll(".render-card");
+  function lockAnimations(btn,secs, iconUrl='https://raw.githubusercontent.com/AlonsoAliaga/mc-renders/main/assets/images/lock-icon.png') {
+    let cards = [];
+    if(!btn) {
+      cards = document.querySelectorAll(".render-card");
+    }else{
+      cards.push(btn);
+    }
     console.log(secs)
     globalModelsLock = true;
     for(let card of cards) {
@@ -2381,7 +2385,7 @@ const defaultGradients = {
   }
   // Example: lock all buttons for 5 seconds on page load
   window.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('button').forEach(btn => lockAnimations(btn, 5));
+    document.querySelectorAll('.render-card').forEach(btn => lockAnimations(btn, 5));
   });
 loadPage();
 function loadPage() {
@@ -2392,12 +2396,12 @@ function loadPage() {
             if(layer == "innerLayer") {
                 i.push(`<div style="width: 160px;height:50px;line-height: 50px;display: inline-block;font-family: MinecraftBold;margin: 0px 2px 2px 2px;padding: 5px 10px 5px 10px;" class="darkbuttonboxes">
             <input type="checkbox" id="${part}-${layer}-div" checked></input>
-            <label for="${part}-${layer}-div" style="margin-bottom: 0px;margin-top: 0px;margin-left: 0px;margin-right: 10px;"> ${skinPartsName[part]}</label>
+            <label for="${part}-${layer}-div" style="font-size:20px;margin-bottom: 0px;margin-top: 0px;margin-left: 0px;margin-right: 10px;"> ${skinPartsName[part]}</label>
         </div>`)
             }else{
                 o.push(`<div style="width: 160px;height:50px;line-height: 50px;display: inline-block;font-family: MinecraftBold;margin: 0px 2px 2px 2px;padding: 5px 10px 5px 10px;" class="darkbuttonboxes">
             <input type="checkbox" id="${part}-${layer}-div" checked></input>
-            <label for="${part}-${layer}-div" style="margin-bottom: 0px;margin-top: 0px;margin-left: 0px;margin-right: 10px;"> ${skinPartsName[part]}</label>
+            <label for="${part}-${layer}-div" style="font-size:20px;margin-bottom: 0px;margin-top: 0px;margin-left: 0px;margin-right: 10px;"> ${skinPartsName[part]}</label>
         </div>`)
             }
       }
