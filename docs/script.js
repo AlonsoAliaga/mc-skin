@@ -4,7 +4,7 @@ let skinViewer = new skinview3d.SkinViewer({
     height: 400,
     //skin: "img/skin.png"
 });
-
+let adLocked = ["run","crouch","fly"];
 const skinParts = ["head", "body", "rightArm", "leftArm", "rightLeg", "leftLeg"];
 const skinPartsName = {
     "head":"Head",
@@ -290,6 +290,11 @@ function selectCape(capeType) {
     }
 }
 function selectAnimation(animationType) {
+    if(typeof adBlockEnabled != "undefined") {
+      if(adBlockEnabled) {
+        if(adLocked.includes(animationType)) return;
+      }
+    }
     if(availableAnimations[animationType]) {
         if(globalModelsLock) return;
         skinViewer.animation = availableAnimations[animationType].animation;
@@ -1125,6 +1130,7 @@ const defaultGradients = {
       }catch(e){}
     }
     setTimeout(()=>{
+      return
       let href = window.location.href;
       if(!href.includes(atob("YWxvbnNvYWxpYWdhLmdpdGh1Yi5pbw=="))) {
         try{document.title = `Page stolen from https://${atob("YWxvbnNvYWxpYWdhLmdpdGh1Yi5pbw==")}`;}catch(e){}
@@ -2496,6 +2502,7 @@ const defaultGradients = {
       let animationData = availableAnimations[animationType];
       let element = document.createElement("div");
       element.classList.add("render-card");
+      element.id = `animation-${animationType}`;
       let link = animationData.image != "" ? animationData.image : `https://raw.githubusercontent.com/AlonsoAliaga/mc-skin/main/assets/images/animations/${animationType}.gif`;
       element.innerHTML = `<img src="${link}" alt="${animationData.name} Model">
                 <div style="margin-top:-5px;font-size:20px;font-weight:bold;" class="render-label">${animationData.name}</div>`
@@ -2632,6 +2639,20 @@ const defaultGradients = {
     });
   }
   loadListener();
+  function lockAnimationsWithMessage(types,message,iconUrl='https://raw.githubusercontent.com/AlonsoAliaga/mc-renders/main/assets/images/lock-icon.png') {
+    let cards = types.map(n=> document.getElementById(`animation-${n}`)).filter(Boolean);
+    //console.log(secs)
+    for(let card of cards) {
+      //if(card.classList.contains('locked')) return;
+      //console.log(`M Seconds ${seconds}`);
+      card.classList.add('locked');
+      card.classList.add('adlocked');
+      const ov = document.createElement('div');
+      ov.className = 'overlay';
+      ov.innerHTML = `<img src="${iconUrl}"><span>${message}</span>`;
+      card.append(ov);
+    }
+  }
   function lockAnimations(btn,secs, iconUrl='https://raw.githubusercontent.com/AlonsoAliaga/mc-renders/main/assets/images/lock-icon.png') {
     let cards = [];
     if(!btn) {
@@ -2643,6 +2664,7 @@ const defaultGradients = {
     globalModelsLock = true;
     for(let card of cards) {
       if(card.classList.contains('locked')) return;
+      if(card.classList.contains('adlocked')) return;
       let seconds = secs;
       //console.log(`M Seconds ${seconds}`);
       card.classList.add('locked');
@@ -2757,3 +2779,6 @@ document.addEventListener("DOMContentLoaded", () => {
   loadCounter();
   checkSite(window);
 });
+function processAds() {
+  lockAnimationsWithMessage(adLocked,`Disable AdBlock to access this animation!`)
+}

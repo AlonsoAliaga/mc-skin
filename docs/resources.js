@@ -1,10 +1,11 @@
 const hours = 12;
 const allowReminder = true;
+let adBlockEnabled = false;
+function isAdBlockEnabled() {
+  return adBlockEnabled;
+}
 async function detectAdBlock() {
-  if(!isTimeToRemember()) {
-    return;
-  }
-  let adBlockEnabled = false;
+  adBlockEnabled = false;
   const googleAdUrl = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
   try {
       const keywordsToCheck = ['uBlock', "adblock",
@@ -34,6 +35,10 @@ const body = document.querySelector('body')
 window.onload = async () => {
   const adBlockEnabled = await detectAdBlock();
   if (adBlockEnabled) {
+    processAds();
+    if(!isTimeToRemember()) {
+      return;
+    }
     body.setAttribute('aria-hidden', 'true');
     if (hiddenBody) {
       body.innerHTML = '';
