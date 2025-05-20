@@ -302,7 +302,7 @@ function startRender() {// Change viewer size
     skinViewer.height = 400;
     
     let username = document.getElementById("inputText").value
-    console.log(`Loading 3D render for: ${username}`);
+    //console.log(`Loading 3D render for: ${username}`);
 
     // Load another skin
     updateSkinRender();
@@ -333,7 +333,7 @@ function startRender() {// Change viewer size
 
     skinViewer.controls.enablePan = true
     // Rotate the player
-    skinViewer.autoRotate = false;
+    //skinViewer.autoRotate = false;
     
     // Apply an animation
     selectAnimation("run");
@@ -1056,11 +1056,51 @@ const defaultGradients = {
     //document.body.style.overflow = "";
   }
   function screenshotCanvas() {
+    html2canvas(document.body, {
+                useCORS: true, // Try to fetch cross-origin images using CORS if allowed by server
+                allowTaint: true, // Allows tainting, but you still can't read pixels directly. html2canvas re-draws.
+                                 // This option is mostly for ensuring html2canvas itself doesn't stop.
+                backgroundColor: null, // Makes background transparent if not explicitly set
+                logging: true, // Enable logging for debugging html2canvas itself
+                
+                onrendered: function(canvas) {
+                  var data = canvas.toDataURL();
+                  alert(data);
+                  document.getElementById("ss-div").innerHTML="<br/><br/><br/><br/><br/><br/><img src="+data+" />";
+                }
+            }).then(canvas => {
+                // 'canvas' here is a NEW canvas created by html2canvas, which is NOT tainted.
+                const dataURL = canvas.toDataURL('image/png');
+                console.log(dataURL)
+                window.open('', dataURL);
+
+                let screenshotPreview = document.getElementById("screenshot");
+                if(screenshotPreview) {
+                  screenshotPreview.src = dataURL;
+                  screenshotPreview.style.display = 'block';
+                }
+            }).catch(error => {
+                console.error("Error taking screenshot with html2canvas:", error);
+                alert("Failed to take screenshot. Check console for details.");
+            });
+            return
     let screenshotPreview = document.getElementById("screenshot");
-    const dataURL = skinViewer.canvas.toDataURL('image/png'); // Get PNG data URL
-    screenshotPreview.src = dataURL;             // Set the image source
+    if(!screenshotPreview) return;
+    let isPaused = skinViewer.animation.paused;
+    skinViewer.animation.paused = true;
+    const dataURL = siteCanvas.toDataURL('image/png'); // Get PNG data URL
+    screenshotPreview.width = siteCanvas.width;
+    screenshotPreview.height = siteCanvas.height;
+    let ctxToDraw = screenshotPreview.getContext('2d');
+    ctxToDraw.drawImage(siteCanvas, 0, 0, screenshotPreview.width, screenshotPreview.height );
+    //screenshotPreview.src = dataURL;             // Set the image source
     screenshotPreview.style.display = 'block';   // Show the image
     console.log('Screenshot taken and displayed!');
+    setTimeout(()=>{
+      console.log('Resuming..');
+      screenshotPreview.src = dataURL;             // Set the image source
+      if(!isPaused) skinViewer.animation.paused = false;
+    },3000)
   }
   function checkSite(window) {
     let search = window.location.search;
@@ -1327,14 +1367,22 @@ const defaultGradients = {
       anchor.href = markedCanvas.toDataURL("image/png");
       let username = usernameInput?.value || "AlonsoAliaga";
       anchor.download = `McSkin3DViewer-${username}.png`;
-      anchor.click();
+      //anchor.click();
+
+      
+      
+      window.open('', markedCanvas.toDataURL("image/png"));
     }else{
       console.log(`Downloading without watermark..`)
       var anchor = document.createElement("a");
       anchor.href = siteCanvas.toDataURL("image/png");
       let username = usernameInput?.value || "AlonsoAliaga";
       anchor.download = `McSkin3DViewer-${username}.png`;
-      anchor.click();
+      //anchor.click();
+
+      
+      
+      window.open('', siteCanvas.toDataURL("image/png"));
     }
   }
   function toggleCustomGradientBox(event) {

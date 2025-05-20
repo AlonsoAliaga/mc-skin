@@ -1,4 +1,7 @@
-const BLOCKED_URL_REGEX = /https:\/\/.*\.imgur\.com/i;
+const BLOCKED_URL_REGEXS = [
+    /https:\/\/.*\.imgur\.com*/i,
+    /https:\/\/.*\.github[a-z]*.(io|com)*/i
+]
 const ALLOWED_REFERRER_DOMAIN = 'alonsoaliaga.github.io';
 
 self.addEventListener('fetch', function(event) {
@@ -17,14 +20,11 @@ self.addEventListener('fetch', function(event) {
     if(referrerDomain.includes(ALLOWED_REFERRER_DOMAIN)) {
         event.respondWith(fetch(event.request));
     }else{
-        // Check if the request is to imgur.com AND the referrer domain matches your allowed domain
-        if (BLOCKED_URL_REGEX.test(requestUrl) && !referrerDomain.includes(ALLOWED_REFERRER_DOMAIN)) {
-            console.log(`Service Worker Blocked (referrer: ${referrerUrl}): ${requestUrl}`);
+        if(BLOCKED_URL_REGEXS.some(BLOCKED_URL_REGEX => BLOCKED_URL_REGEX.test(requestUrl))) {
             event.respondWith(
-                new Response(null, { status: 200, statusText: 'Blocked by Service Worker' })
+                new Response(null, { status: 200, statusText: 'Blocked by CORS' })
             );
-        } else {
-            // For all other requests, proceed normally
+        }else{
             event.respondWith(fetch(event.request));
         }
     }

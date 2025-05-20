@@ -78,14 +78,16 @@
                 console.log(`Speed: ${skinViewer.animation.speed}`)
             };
             modify(event);">⏸︎</button>
-            <button id="capture-canvas" class="button-small" style="padding: 0px 10px 5px 10x;width: 160px;height: 50px;font-size: 20px;display: inline;margin: 5px;vertical-align: middle" onclick="screenshotCanvas();">Capture 📸</button>
+            <!-- <button id="capture-canvas" class="button-small" style="padding: 0px 10px 5px 10x;width: 160px;height: 50px;font-size: 20px;display: inline;margin: 5px;vertical-align: middle" onclick="screenshotCanvas();">Capture 📸</button> -->
           </div>
           <div style="display: flex;align-items: center;">
             <button style="--hoverTransform: calc(0rem - 7.5rem / 18.5);--baseTransform: calc(0rem + 7.5rem / 18.5);" class="button-left" 
               onclick="previousPanorama()">
               <p style="margin-left:0;padding-right: 0px;" class="button-left">&lt;</p>
             </button>
-            <canvas id="skin_container"></canvas>
+            <div id="to-capture">
+              <canvas id="skin_container"></canvas>
+            </div>
             <canvas style="display: none;" id="marked-canvas"></canvas>
             <button style="--hoverTransform: calc(0rem + 7.5rem / 18.5);--baseTransform: calc(0rem - 7.5rem / 18.5);" class="button-right"
               onclick="nextPanorama()">
@@ -162,6 +164,17 @@
                     </div>
                 <br>
             </fieldset><br>
+            <div id="rotate-div" style="width: 50%;display: inline-block;font-family: MinecraftBold;margin: 0px 2px 2px 2px;padding: 5px 10px 5px 10px;" class="darkbuttonboxes">
+              <input type="checkbox" id="rotate-toggle" onclick="function toggleRotate(a){
+                if(a.checked) {
+                  skinViewer.autoRotate = true;
+                }else{
+                  skinViewer.autoRotate = false;
+                }
+              };
+              toggleRotate(this);"></input>
+              <label for="rotate-toggle" style="margin-bottom: 0px;margin-top: 0px;margin-left: 0px;margin-right: 10px;"> Auto rotation 🔁</label>
+            </div><br>
             <div id="button-landscape-skin-div" style="width: 50%;display: inline-block;font-family: MinecraftBold;margin: 0px 2px 2px 2px;padding: 5px 10px 5px 10px;" class="darkbuttonboxes">
               <input type="checkbox" id="button-toggle-landscape" onclick="function toggleBgColor(a){
                 if(a.checked) {
@@ -181,10 +194,11 @@
                 <label for="bg-color-picker" style="margin-bottom: 0px;margin-top: 0px;margin-left: 0px;margin-right: 10px;"> Pick your color 🎨</label>
               </div>
             </fieldset>
-            <div id="button-remove-watermark-download-div" style="width: 50%;display: inline-block;font-family: MinecraftBold;margin: 2px 2px 2px 2px;padding: 5px 10px 5px 10px;" class="darkbuttonboxes">
+            <div id="button-remove-watermark-download-div" style="width: 50%;display: none;font-family: MinecraftBold;margin: 2px 2px 2px 2px;padding: 5px 10px 5px 10px;" class="darkbuttonboxes">
               <input type="checkbox" name="button-remove-watermark-download" id="button-remove-watermark-download" onclick="toggleWatermark(this);"></input>
               <label for="button-remove-watermark-download" style="margin-bottom: 0px;margin-top: 0px;margin-left: 0px;margin-right: 10px;"> Remove watermark in download? 👓</label>
-            </div><br>
+            </div>
+            <!-- <br> -->
           </ul> 
         </fieldset><br>
       </div>
@@ -198,11 +212,11 @@
         </fieldset>
       </div>
       <br>
-      <div id="download-all" style="display: inline-block;font-family: MinecraftBold;padding: 5px 10px 5px 10px;" class="darkbuttonboxes">
+
+      <!-- <div id="download-all" style="display: inline-block;font-family: MinecraftBold;padding: 5px 10px 5px 10px;" class="darkbuttonboxes">
         <input type="button" style="outline: none; display: none;" checked id="downloadall" onclick="downloadProfile();"></input>
         <label id="download-all-label" for="downloadall" style="margin-bottom: 0px;margin-top: 0px;margin-left: 20px;;margin-right: 15px;"> Download your Minecraft Render with watermark 📥</label>
-      </div>
-      <br>
+      </div> -->
       <br>
       <div style="justify-content: center;display: flex;">
         <div class="center-container">
@@ -228,8 +242,6 @@
         </div>
       </div>
       <br>
-      <h2 style="font-size: 15px ;text-align: center;">Huge thanks to <a href="https://lunareclipse.studio" rel="noopener" target="_blank">LunarEclipse</a> for his endpoint which is used in this site.</h2>
-      <br>
       <!-- <div id="mybutton">
         <button class="buttonface"><a href="https://alonsoaliaga.github.io"><img src="https://raw.githubusercontent.com/AlonsoAliaga/alonsoaliaga.github.io/main/assets/img/apple-touch-icon.png"></a></button>
       </div> -->
@@ -244,10 +256,10 @@
       </div>
     </div>
   </div>
-  <div style="position: fixed; left: 20px; bottom: 20px;" class="darkbuttonboxes">
-    <img id="screenshot" width="250px" src="https://raw.githubusercontent.com/AlonsoAliaga/alonsoaliaga.github.io/main/assets/img/apple-touch-icon.png"><br>
+  <!-- <div id="ss-div" style="position: fixed; left: 20px; bottom: 20px;" class="darkbuttonboxes">
+    <canvas id="screenshot" width="600px" height="400px"></canvas><br>
     Screenshot
-  </div>
+  </div> -->
   <!-- <script src="jquery-1.6.1.min.js"></script> -->
   <script src="script.js"></script>
   <!-- <script src="script.js"></script> -->
@@ -259,6 +271,7 @@
   <script src="resources.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gif.js.optimized@1.0.1/dist/gif.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gif.js@0.2.0/dist/gif.worker.js"></script>
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
   <script>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', function() {
