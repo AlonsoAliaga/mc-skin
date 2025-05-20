@@ -1049,11 +1049,11 @@ const defaultGradients = {
   }
   function block() {
     document.getElementById("maintenance-overlay").style.display = "none";
-    document.body.style.overflow = "hidden";
+    //document.body.style.overflow = "hidden";
   }
   function unblock() {
     document.getElementById("maintenance-overlay").style.display = "none";
-    document.body.style.overflow = "";
+    //document.body.style.overflow = "";
   }
   function checkSite(window) {
     let search = window.location.search;
