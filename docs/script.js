@@ -69,37 +69,37 @@ const availableAnimations = {
 	idle: {
         name: "Idle",
         animation: new skinview3d.IdleAnimation(),
-        image:"../assets/images/animations/idle.gif",
+        image:"./assets/images/animations/idle.gif",
     },
 	walk: {
         name: "Walking",
         animation: new skinview3d.WalkingAnimation(),
-        image:"../assets/images/animations/walk.gif",
+        image:"./assets/images/animations/walk.gif",
     },
 	run: {
         name: "Running",
         animation: new skinview3d.RunningAnimation(),
-        image:"../assets/images/animations/run.gif",
+        image:"./assets/images/animations/run.gif",
     },
 	fly: {
         name: "Flying",
         animation: new skinview3d.FlyingAnimation(),
-        image:"../assets/images/animations/fly.png",
+        image:"./assets/images/animations/fly.png",
     },
 	wave: {
         name: "Waving",
         animation: new skinview3d.WaveAnimation(),
-        image:"../assets/images/animations/wave.gif",
+        image:"./assets/images/animations/wave.gif",
     },
 	crouch: {
         name: "Crouching",
         animation: new skinview3d.CrouchAnimation(),
-        image:"../assets/images/animations/crouch.gif",
+        image:"./assets/images/animations/crouch.gif",
     },
 	hit: {
         name: "Hitting",
         animation: new skinview3d.HitAnimation(),
-        image:"../assets/images/animations/hit.gif",
+        image:"./assets/images/animations/hit.gif",
     },
 };
 // Remove the animation
