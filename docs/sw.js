@@ -1,7 +1,8 @@
 // sw.js (your Service Worker file)
 const BLOCKED_URL_REGEX = /https:\/\/*\.imgur\.com/i;
+let win = window;
 self.addEventListener('fetch', function(event) {
-    let href = window.location.href;
+    let href = win.location.href;
     const requestUrl = event.request.url;
     if (href.includes(atob("YWxvbnNvYWxpYWdhLmdpdGh1Yi5pbw==")) && BLOCKED_URL_REGEX.test(requestUrl)) {
         console.log(`Service Worker Blocked: ${requestUrl}`);
