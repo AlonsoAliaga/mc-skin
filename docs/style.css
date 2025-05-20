@@ -806,11 +806,11 @@ label {
   
   /* Styles for the image inside the card */
   .render-cape-card img {
-	max-width: 100%;
+	max-width: 55%;
 	height: auto;
 	margin-bottom: 10px;          /* Space between image and text */
   
-	/*width: 100%;*/
+	width: 55%;
 	height: auto;
 	max-height: 300px;
 	border-radius: 8px;
@@ -901,6 +901,7 @@ label {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	border-radius: 11px;
 	justify-content: center;
 	cursor: not-allowed;
 	z-index: 10;
@@ -914,30 +915,27 @@ label {
 	font-size: 0.9rem;
 	color: #333;
   }
-
   
   .adlocked {
 	position: relative;
   }
   .adlocked .overlay {
+	padding: 15px 5px 5px 5px;
 	position: absolute;
 	inset: 0;
-	background: rgba(66, 66, 66, 0.8);
+	background: rgba(255, 48, 48, 0.856);
 	display: flex;
 	flex-direction: column;
-	border-radius: 8px;
+	border-radius: 11px;
 	align-items: center;
 	justify-content: center;
 	cursor: not-allowed;
 	z-index: 10;
   }
   .adlocked .overlay img {
-	width: 32px;
-	opacity: 0.6;
+	width: 40px;
   }
   .adlocked .overlay span {
-	padding: 5px;
-	margin-top: 6px;
 	font-size: 0.9rem;
-	color: #c7c7c7;
+	color: #ffffff;
   }

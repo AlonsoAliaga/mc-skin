@@ -5,7 +5,7 @@ let skinViewer = new skinview3d.SkinViewer({
     //skin: "img/skin.png"
 });
 let adLockedAnimations = ["run","crouch","fly"];
-let adLockedCapes = ["15th","million","minecraftexperience","snowman","home"];
+let adLockedCapes = ["15th","mcchampionship","million","minecraftexperience","snowman","home"];
 const skinParts = ["head", "body", "rightArm", "leftArm", "rightLeg", "leftLeg"];
 const skinPartsName = {
     "head":"Head",
@@ -2491,6 +2491,7 @@ const defaultGradients = {
       //element.style.minWidth = "fit-content"
       element.id = `cape-${capeType}`
       element.style.margin = "2px"
+      element.dataset.capeUrl = capeData.image;
       element.innerHTML = `<img src="${capeData.image}" alt="${capeData.name}">
                 <div style="display:inline-block;min-width:fit-content;margin-top:-5px;font-size:15px;font-weight:bold;" class="render-label">${capeData.name}</div>`
       element.onclick = function(){selectCape(capeType)}
@@ -2651,10 +2652,12 @@ const defaultGradients = {
     for(let card of cards) {
       //if(card.classList.contains('locked')) return;
       //console.log(`M Seconds ${seconds}`);
+      //console.log(card)
       card.classList.add('adlocked');
       const ov = document.createElement('div');
       ov.className = 'overlay';
-      ov.innerHTML = `<img src="${iconUrl}"><span>${message}</span>`;
+      let capeUrl = card.dataset.capeUrl
+      ov.innerHTML = `<img src="${capeUrl}"><span>${message}</span>`;
       card.append(ov);
     }
   }
