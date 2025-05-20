@@ -2144,6 +2144,7 @@ const defaultGradients = {
           skinType = 1;
           loadedSkinBuffer = img;
           //console.log(`Uploaded custom image: ${file.name} | ${img.width}px x ${img.height}px`);
+          skinViewer.loadSkin(img)
           updateSkin(true);
         };
       });
