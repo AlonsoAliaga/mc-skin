@@ -1057,8 +1057,7 @@ const defaultGradients = {
   }
   function screenshotCanvas() {
     let screenshotPreview = document.getElementById("screenshot");
-    let canvas = document.getElementById("skin_container");
-    const dataURL = canvas.toDataURL('image/png'); // Get PNG data URL
+    const dataURL = skinViewer.canvas.toDataURL('image/png'); // Get PNG data URL
     screenshotPreview.src = dataURL;             // Set the image source
     screenshotPreview.style.display = 'block';   // Show the image
     console.log('Screenshot taken and displayed!');
