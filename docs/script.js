@@ -67,7 +67,12 @@ const backgrounds = {
 const skinLayers = ["innerLayer", "outerLayer"];
 const availableCapes = {
   "15th": {
-    name: "15th Birthday 🎂",
+    name: "15th Anniversary 🎂",
+    image: "https://i.imgur.com/nrZ43ye.png",
+    link: "https://i.imgur.com/zwNkVac.png"
+  },
+  "mcchampionship": {
+    name: "MC Championship 🏆",
     image: "https://i.imgur.com/jWFfwfQ.png",
     link: "https://i.imgur.com/g5npzTh.png"
   },
@@ -75,7 +80,17 @@ const availableCapes = {
     name: "Million Customer ⭐",
     image: "https://i.imgur.com/ydrIKpz.png",
     link: "https://i.imgur.com/WjdvpNG.png"
-  }
+  },
+  "birthday": {
+    name: "Birthday 🎂",
+    image: "https://i.imgur.com/SljUkBN.png",
+    link: "https://i.imgur.com/8hTV1YG.png"
+  },
+  "founder": {
+    name: "Founder 👑",
+    image: "https://i.imgur.com/KyloQdg.png",
+    link: "https://i.imgur.com/yFSezvu.png"
+  },
 }
 const availableAnimations = {
 	idle: {
