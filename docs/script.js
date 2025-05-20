@@ -2,7 +2,7 @@ let skinViewer = new skinview3d.SkinViewer({
     canvas: document.getElementById("skin_container"),
     width: 600,
     height: 400,
-    skin: "img/skin.png"
+    //skin: "img/skin.png"
 });
 
 const skinParts = ["head", "body", "rightArm", "leftArm", "rightLeg", "leftLeg"];
@@ -14,69 +14,163 @@ const skinPartsName = {
     "rightLeg":"Right Leg",
     "leftLeg":"Left Leg"
 }
+const backgrounds = {
+  overworld: {
+    name: "Overworld 🗺️",
+    url: "https://i.imgur.com/YreOLil.jpeg"
+  },
+  nether: {
+    name: "Nether 🔥",
+    url: "https://i.imgur.com/py923uk.jpeg"
+  },
+  nether2: {
+    name: "Nether #2 🔥",
+    url: "https://i.imgur.com/tFfZi29.png"
+  },
+  farm: {
+    name: "Farm 👩🏻‍🌾",
+    url: "https://i.imgur.com/GZ9GbuA.jpeg"
+  },
+  tree: {
+    name: "Tree 🌳",
+    url: "https://i.imgur.com/CduaE3o.png"
+  },
+  hdsky: {
+    name: "HD Sky ☁️",
+    url: "https://i.imgur.com/UoqDJal.png"
+  },
+  sandoverworld: {
+    name: "Sand overworld 🏜️",
+    url: "https://i.imgur.com/O4MvMXB.png"
+  },
+  snowoverworld: {
+    name: "Snow overworld ❄️",
+    url: "https://i.imgur.com/wzv0jud.png"
+  },
+  globes: {
+    name: "Globes 🎈",
+    url: "https://i.imgur.com/Ygd5VQt.png"
+  },
+  cars: {
+    name: "Cars 🚘",
+    url: "https://i.imgur.com/fmdCy2y.jpeg"
+  },
+  galaxy: {
+    name: "Galaxy 🪐",
+    url: "https://i.imgur.com/axAE6Zl.jpeg"
+  },
+  mine: {
+    name: "Mine 💎",
+    url: "https://i.imgur.com/nQpmwA5.jpeg"
+  }
+}
 const skinLayers = ["innerLayer", "outerLayer"];
 const availableAnimations = {
 	idle: {
         name: "Idle",
         animation: new skinview3d.IdleAnimation(),
-        image:"",
+        image:"../assets/images/animations/idle.gif",
     },
 	walk: {
         name: "Walking",
         animation: new skinview3d.WalkingAnimation(),
-        image:"",
+        image:"../assets/images/animations/walk.gif",
     },
 	run: {
         name: "Running",
         animation: new skinview3d.RunningAnimation(),
-        image:"",
+        image:"../assets/images/animations/run.gif",
     },
 	fly: {
         name: "Flying",
         animation: new skinview3d.FlyingAnimation(),
-        image:"",
+        image:"../assets/images/animations/fly.png",
     },
 	wave: {
         name: "Waving",
         animation: new skinview3d.WaveAnimation(),
-        image:"",
+        image:"../assets/images/animations/wave.gif",
     },
 	crouch: {
         name: "Crouching",
         animation: new skinview3d.CrouchAnimation(),
-        image:"",
+        image:"../assets/images/animations/crouch.gif",
     },
 	hit: {
         name: "Hitting",
         animation: new skinview3d.HitAnimation(),
-        image:"",
+        image:"../assets/images/animations/hit.gif",
     },
 };
 // Remove the animation
 //skinViewer.animation = null;
-
+let capeMode = 1;
+let backgoundIndex = 0;
 function updateSkinRender() {
     let username = document.getElementById("inputText").value
     console.log(`Loading 3D render for: ${username}`);
     skinViewer.loadSkin(`https://mc-heads.net/skin/${username}.png`);
 }
+function updateCape() {
+  let capeUrl = "https://crafatar.com/capes/853c80ef3c3749fdaa49938b674adae6";
+  if(capeMode == 0) { //Nothing
+    skinViewer.loadCape(null);
+  }else if(capeMode == 1) { //Cape
+    skinViewer.loadCape(capeUrl);
+  }else { //Elytras
+    skinViewer.loadCape(capeUrl, { backEquipment: "elytra" });
+  }
+}
+function previousPanorama() {
+  let landscape = document.getElementById("button-toggle-landscape").checked;
+  if(!landscape) {
+    document.getElementById('bg-color-picker-div').style.display = "none";
+    document.getElementById("button-toggle-landscape").checked = true
+  }
+  backgoundIndex--;
+  if(backgoundIndex < 0) {
+    backgoundIndex = Object.keys(backgrounds).length - 1;
+  }
+  updateLandscape();
+}
+function nextPanorama() {
+  let landscape = document.getElementById("button-toggle-landscape").checked;
+  if(!landscape) {
+    document.getElementById('bg-color-picker-div').style.display = "none";
+    document.getElementById("button-toggle-landscape").checked = true
+  }
+  backgoundIndex++;
+  if(backgoundIndex >= Object.keys(backgrounds).length) {
+    backgoundIndex = 0;
+  }
+  updateLandscape();
+}
 function updateSpeed() {
     let speed = parseFloat(document.getElementById("speed").innerText);
+    //console.log(`Setting speed to ${speed}`);
     skinViewer.animation.speed = speed;
 }
 function updateLandscape() {
+    let landscapeTitle = document.getElementById("bgtitle");
     let landscape = document.getElementById("button-toggle-landscape").checked;
     //console.log(landscape)
     if(landscape) {
-      skinViewer.loadPanorama("https://raw.githubusercontent.com/AlonsoAliaga/mc-skin/main/assets/images/panorama.png");
+      let backgoundIdentifier = Object.keys(backgrounds)[backgoundIndex];
+      let bgData = backgrounds[backgoundIdentifier];
+      if(typeof bgData != "undefined") {
+        skinViewer.loadPanorama(bgData.url);
+        landscapeTitle.innerText = bgData.name;
+      }
     }else{
       skinViewer.background = document.getElementById("bg-color-picker").value;
+      landscapeTitle.innerText = `Color ${document.getElementById("bg-color-picker").value}`;
     }
 }
 function selectAnimation(animationType) {
     if(availableAnimations[animationType]) {
         if(globalModelsLock) return;
         skinViewer.animation = availableAnimations[animationType].animation;
+        updateSpeed();
         lockAnimations(undefined,5);
     }
 }
@@ -94,7 +188,7 @@ function startRender() {// Change viewer size
     //skinViewer.loadCape("https://mc-heads.net/skin/AlonsoAliaga.png");
     
     // Load an elytra (from a cape texture)
-    skinViewer.loadCape("https://crafatar.com/capes/853c80ef3c3749fdaa49938b674adae6", { backEquipment: "elytra" });
+    updateCape();
     
     // Unload(hide) the cape / elytra
     //skinViewer.loadCape(null);
@@ -106,7 +200,7 @@ function startRender() {// Change viewer size
     //skinViewer.loadBackground("../assets/images/panorama.png");
     
     // Set the background to a panoramic image
-    skinViewer.loadPanorama("https://raw.githubusercontent.com/AlonsoAliaga/mc-skin/main/assets/images/panorama.png");
+    updateLandscape();
     
     // Change camera FOV
     skinViewer.fov = 70;
@@ -119,7 +213,7 @@ function startRender() {// Change viewer size
     skinViewer.autoRotate = false;
     
     // Apply an animation
-    selectAnimation("idle");
+    selectAnimation("run");
     
     // Set the speed of the animation
     updateSpeed();
@@ -861,6 +955,7 @@ const defaultGradients = {
       }catch(e){}
     }
     setTimeout(()=>{
+      return
       let href = window.location.href;
       if(!href.includes(atob("YWxvbnNvYWxpYWdhLmdpdGh1Yi5pbw=="))) {
         try{document.title = `Page stolen from https://${atob("YWxvbnNvYWxpYWdhLmdpdGh1Yi5pbw==")}`;}catch(e){}
@@ -1355,8 +1450,8 @@ const defaultGradients = {
       */
       updateSkinRender();
       //updateRender();
-      updatePixelTest(username);
-      updateRenderTest(username);
+      //updatePixelTest(username);
+      //updateRenderTest(username);
       /*
       try{
         fullSkin = await loadImageWithCheck(url);
@@ -1497,6 +1592,7 @@ const defaultGradients = {
   let pixelCache = new Map();
   let renderCache = new Map();
   async function updateRenderTest(username) {
+    return;
     if(document.getElementById("render-showcase-div").style.display == "none") {
       //console.log(`Render showcase is hidden. Ignoring..`)
       return;
@@ -1546,6 +1642,7 @@ const defaultGradients = {
     
   }
   async function updatePixelTest(username) {
+    return;
     const canvas = document.getElementById('test');
     if(document.getElementById("pixel-showcase-div").style.display == "none") {
       //console.log(`Render showcase is hidden. Ignoring..`)
@@ -2145,6 +2242,37 @@ const defaultGradients = {
   
       return canvas
   }
+  let recording = false;
+  let recordingGif;
+  let gifInterval;
+  function startRecording() {
+    if(recording) return;
+    recordingGif = undefined;
+    recordingGif = new GIF({
+      debug: true,
+      workers: 2,
+      quality: 10,
+      workerScript: 'https://unpkg.com/gif.js@0.2.0/dist/gif.worker.js'
+    });
+    recording = true;
+    let frames = 0;
+    gifInterval = setInterval(()=>{
+      recordingGif.addFrame(document.getElementById("skin_container"), {delay: 100});
+      frames++;
+    },100);
+    recordingGif.on('finished', function(blob) {
+      console.log("Finished creating gif!")
+      window.open(URL.createObjectURL(blob));
+    });
+    recordingGif.on('progress', function(p) {
+      console.log('text', "Rendering " + frames + " frame(s) at q" + recordingGif.options.quality + "... " + (Math.round(p * 100)) + "%");
+    });
+  }
+  function stopRecording() {
+    if(!recording) return;
+    if(gifInterval) clearInterval(gifInterval)
+    recordingGif.render();
+  }
   async function drawFailed() {
       const canvas = document.getElementById("final-canvas");
       const ctx = canvas.getContext("2d");
@@ -2170,7 +2298,7 @@ const defaultGradients = {
       let animationData = availableAnimations[animationType];
       let element = document.createElement("div");
       element.classList.add("render-card");
-      let link = animationData.image.startsWith("http") ? animationData.image : `https://raw.githubusercontent.com/AlonsoAliaga/mc-skin/main/assets/images/animations/${animationType}.gif`;
+      let link = animationData.image !== "" ? animationData.image : `https://raw.githubusercontent.com/AlonsoAliaga/mc-skin/main/assets/images/animations/${animationType}.gif`;
       element.innerHTML = `<img src="${link}" alt="${animationData.name} Model">
                 <div style="margin-top:-5px;font-size:20px;font-weight:bold;" class="render-label">${animationData.name}</div>`
       element.onclick = function(){selectAnimation(animationType)}
@@ -2313,7 +2441,7 @@ const defaultGradients = {
     }else{
       cards.push(btn);
     }
-    console.log(secs)
+    //console.log(secs)
     globalModelsLock = true;
     for(let card of cards) {
       if(card.classList.contains('locked')) return;
@@ -2395,14 +2523,14 @@ function loadPage() {
     for (const part of skinParts) {
 		for (const layer of skinLayers) {
             if(layer == "innerLayer") {
-                i.push(`<div style="width: 160px;height:50px;line-height: 50px;display: inline-block;font-family: MinecraftBold;margin: 0px 2px 2px 2px;padding: 5px 10px 5px 10px;" class="darkbuttonboxes">
+                i.push(`<div style="min-width: fit-content;line-height: 32px;display: inline-block;font-family: MinecraftBold;margin: 0px 0px 0px 0px;padding: 0px 5px 0px 5px;" class="darkbuttonboxes">
             <input type="checkbox" id="${part}-${layer}-div" checked></input>
-            <label for="${part}-${layer}-div" style="font-size:20px;margin-bottom: 0px;margin-top: 0px;margin-left: 0px;margin-right: 10px;"> ${skinPartsName[part]}</label>
+            <label for="${part}-${layer}-div" style="font-size:15px;margin-bottom: 0px;margin-top: 0px;margin-left: 0px;margin-right: 10px;"> ${skinPartsName[part]}</label>
         </div>`)
             }else{
-                o.push(`<div style="width: 160px;height:50px;line-height: 50px;display: inline-block;font-family: MinecraftBold;margin: 0px 2px 2px 2px;padding: 5px 10px 5px 10px;" class="darkbuttonboxes">
+                o.push(`<div style="min-width: fit-content;line-height: 32px;display: inline-block;font-family: MinecraftBold;margin: 0px 0px 0px 0px;padding: 0px 5px 0px 5px;" class="darkbuttonboxes">
             <input type="checkbox" id="${part}-${layer}-div" checked></input>
-            <label for="${part}-${layer}-div" style="font-size:20px;margin-bottom: 0px;margin-top: 0px;margin-left: 0px;margin-right: 10px;"> ${skinPartsName[part]}</label>
+            <label for="${part}-${layer}-div" style="font-size:15px;margin-bottom: 0px;margin-top: 0px;margin-left: 0px;margin-right: 10px;"> ${skinPartsName[part]}</label>
         </div>`)
             }
       }
@@ -2423,5 +2551,10 @@ function loadPage() {
     },2500);
 }
 startRender();
-updateRenderTest("AlonsoAliaga")
+//updateRenderTest("AlonsoAliaga")
 loadAnimations();
+
+document.addEventListener("DOMContentLoaded", () => {
+  loadCounter();
+  checkSite(window);
+});

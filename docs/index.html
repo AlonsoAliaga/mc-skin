@@ -9,21 +9,21 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
   
-    <title>Minecraft Renders | AlonsoAliaga Development</title>
+    <title>Minecraft Skin 3D Viewer | AlonsoAliaga Development</title>
     
     <meta name="theme-color" content="#9a14ff"/>
     <meta property="og:type" content="article" />
-    <meta property="og:site_name" content="Minecraft Renders by AlonsoAliaga" />
-    <meta property="og:title" content="Minecraft Renders | AlonsoAliaga Development">
-    <meta property="og:image" content="https://raw.githubusercontent.com/AlonsoAliaga/mc-renders/main/assets/images/renders/mojavatar.png">
+    <meta property="og:site_name" content="Minecraft Skin 3D by AlonsoAliaga" />
+    <meta property="og:title" content="Minecraft Skin 3D Viewer | AlonsoAliaga Development">
+    <meta property="og:image" content="https://raw.githubusercontent.com/AlonsoAliaga/mc-skin/main/assets/images/animations/crouch.gif">
     <meta property="og:description" content="Create cool Minecraft renders with your skin. Many options available. No more paying fiverr artists!">
     <meta property="og:url" content="https://alonsoaliaga.github.io/index.html">
   </head>
   <script src="https://cdn.jsdelivr.net/npm/skinview3d@3.2.0/bundles/skinview3d.bundle.min.js"></script>
-  <body onload="loadCounter(); checkSite(window); ">
+  <body>
     <div id="maintenance-overlay" style="display: flex;">
       <div class="overlay-content">
-        <img src="https://raw.githubusercontent.com/AlonsoAliaga/mc-renders/main/assets/images/renders/mojavatar.png">
+        <img src="https://raw.githubusercontent.com/AlonsoAliaga/mc-skin/main/assets/images/animations/crouch.gif">
         <br>
         <h1>🚧 Site Under Construction</h1>
         <p>We'll be back shortly. Thank you for your patience.</p>
@@ -31,12 +31,13 @@
     </div>
     <div class="content">
       <div class="header">
-        <h1 style="font-family: MinecraftBold;"><a href="https://alonsoaliaga.com/mc-renders" rel="noopener" target="_blank">MC Render</a> Generator</h1>
+        <h1 style="font-family: MinecraftBold;"><a href="https://alonsoaliaga.com/mc-skin" rel="noopener" target="_blank">MC 3D Skin</a> Viewer</h1>
         <h2 style="font-size: 20px; color: rgb(255, 71, 71)">Use Google Chrome or Opera for a better experience. Edge is reported as not compatible!</h2>
         <div class="options" style="padding: 10px 10px 10px 10px; margin-bottom: 10px;">
           <h2 class="rainbow" style="font-size:25px; color:transparent">How is this different from other generators?</h2>
-          This generator allows you to create access multiple type of renders with <b class="rainbow">many</b> cool options.<br><br>
-          <h2 style="font-size: 20px; color: rgb(255, 71, 71)">No more paying fiverr artits for your renders!</h2>
+          This viewer allows you to use different animations with <b class="rainbow">many</b> cool options.<br>
+          Additionally, this is very intuitive and really easy to use.<br><br>
+          <h2 style="font-size: 20px; color: rgb(255, 71, 71)">No more paying others for your gifs!</h2>
           <span style="font-size: 17px;">
             <b>⚠️ If you have cool ideas, suggest them in our <a href="https://alonsoaliaga.com/discord" rel="noopener" target="_blank">official discord server.</a></b><br>
           </span>
@@ -60,34 +61,83 @@
           type="text" maxlength="20" checked id="darkmode" value="AlonsoAliaga" class="darkbuttonboxes"
           placeholder="Type your username" disabled="true"></input>
         <br>
+        <div style="display: inline-block;">
+          <div>
+            <button id="bgtitle" style="font-size: 20px;padding: 5px 15px 10px 15px;" class="darkbuttonboxes">Texto</button><button id="control1" class="button-small" style="padding-bottom: 5px;width: 50px;height: 50px;font-size: 30px;display: inline;margin: 10px;vertical-align: middle" onclick="function modify(event) {
+                if(skinViewer.animation.paused) {
+                  skinViewer.animation.paused = false;
+                  document.getElementById('control1').innerText = '⏸︎';
+                  document.getElementById('control2').innerText = '⏸︎';
+                }else{
+                  skinViewer.animation.paused = true;
+                  document.getElementById('control1').innerText = '⏵︎';
+                  document.getElementById('control2').innerText = '⏵︎';
+                }
+                console.log(`Speed: ${skinViewer.animation.speed}`)
+            };
+            modify(event);">⏸︎</button>
+          </div>
+          <div style="display: flex;align-items: center;">
+            <button style="--hoverTransform: calc(0rem - 7.5rem / 18.5);--baseTransform: calc(0rem + 7.5rem / 18.5);" class="button-left" 
+              onclick="previousPanorama()">
+              <p style="margin-left:0;padding-right: 0px;" class="button-left">&lt;</p>
+            </button>
             <canvas id="skin_container"></canvas>
-            <br>
-            <br>
+            <button style="--hoverTransform: calc(0rem + 7.5rem / 18.5);--baseTransform: calc(0rem - 7.5rem / 18.5);" class="button-right"
+              onclick="nextPanorama()">
+              <p style="margin-left:0rem;padding-left: 18px;" class="button-right">&gt;</p>
+            </button>
+          </div>
+        </div>
+        <br>
+        <br>
       </div>
       <div>
         <fieldset class="group" style="padding: 0px;"> 
           <legend id="thelegend">&nbsp;&nbsp;&nbsp;Select your options 🎮&nbsp;&nbsp;&nbsp;</legend> 
           <ul id="fonts-table" style="font-size: 18px;">
-            <div id="button-toggle-cape-div" style="width: 50%;display: inline-block;font-family: MinecraftBold;margin: 0px 2px 2px 2px;padding: 5px 10px 5px 10px;" class="darkbuttonboxes">
-              <input type="checkbox" id="button-toggle-cape" onclick="function toggleCape() {
-                
+            Cape mode: <div id="button-toggle-cape-div" style="width: 30%;display: inline-block;font-family: MinecraftBold;margin: 0px 2px 2px 2px;padding: 5px 10px 5px 10px;" class="darkbuttonboxes">
+              <input class="hidden-box" data-cape-mode="0" type="checkbox" id="button-toggle-cape" onclick="function toggleCape() {
+                console.log(capeMode)
+                let oldMode = capeMode;
+                capeMode++
+                if(capeMode > 2) {
+                  capeMode = 0;
+                }
+                console.log(`Mode ${oldMode} -> ${capeMode}`);
+                document.getElementById('cape-text').innerText = `${(capeMode == 0 ? `No cape ❌` : (capeMode == 1 ? `Cape mode 🥻` : `Elytras mode 🪽`))}`;
               }
-              toggleCape();"></input>
-              <label for="button-toggle-cape" style="margin-bottom: 0px;margin-top: 0px;margin-left: 0px;margin-right: 10px;"> Show cape 🪽</label>
+              toggleCape();
+              updateCape();"></input>
+              <label id="cape-text" for="button-toggle-cape" style="margin-bottom: 0px;margin-top: 0px;margin-left: 0px;margin-right: 10px;"> Cape mode 🥻</label>
             </div><br>
-
             Speed: 
             <button class="button-small" style="display: inline;margin: 10px;vertical-align: middle" onclick="function modify(event) {
                 document.getElementById('speed').innerText = Math.min(100,parseInt(+document.getElementById('speed').innerText * 10) - ((event.altKey ||  event.shiftKey) ? 2 : 1)) / 10;
             }
             modify(event);updateSpeed();">⯇</button>
-            <button class="darkbuttonboxes" id="speed" style="font-size: 20px;width: 100px;height: 50px;display: inline;margin: 10px;vertical-align: middle;border-color: rgb(97, 97, 97);border-style: solid;border-width: 2px;" id="icon-canvas">0.5</button>
+            <button class="darkbuttonboxes" id="speed" style="font-size: 20px;width: 100px;height: 50px;display: inline;margin: 10px;vertical-align: middle;border-color: rgb(97, 97, 97);border-style: solid;border-width: 2px;">0.5</button>
             <button class="button-small" style="display: inline;margin: 10px;vertical-align: middle" onclick="function modify(event) {
                 document.getElementById('speed').innerText = Math.min(100,parseInt(+document.getElementById('speed').innerText * 10) + ((event.altKey ||  event.shiftKey) ? 2 : 1)) / 10;
             }
             modify(event);updateSpeed();">⯈</button><br>
-
-            <fieldset class="group" style="padding: 0px 15px 0px 15px;margin: 0px 85px 0px 85px;"> 
+            Pause/Unpause: <button id="control2" class="button-small" style="padding-bottom: 5px;width: 50px;height: 50px;font-size: 30px;display: inline;margin: 10px;vertical-align: middle" onclick="function modify(event) {
+                if(skinViewer.animation.paused) {
+                  skinViewer.animation.paused = false;
+                  document.getElementById('control1').innerText = '⏸︎';
+                  document.getElementById('control2').innerText = '⏸︎';
+                }else{
+                  skinViewer.animation.paused = true;
+                  document.getElementById('control1').innerText = '⏵︎';
+                  document.getElementById('control2').innerText = '⏵︎';
+                }
+                //console.log(`Speed: ${skinViewer.animation.speed}`)
+            };
+            modify(event);">⏸︎</button>
+            <br>
+            Start recording: <button id="control2" class="button-small" style="padding-bottom: 5px;width: 50px;height: 50px;font-size: 30px;display: inline;margin: 10px;vertical-align: middle" onclick="startRecording()">🔴</button>
+            Stop recording: <button id="control2" class="button-small" style="padding-bottom: 5px;width: 50px;height: 50px;font-size: 30px;display: inline;margin: 10px;vertical-align: middle" onclick="stopRecording()">⏸︎</button>
+            <fieldset class="group" style="padding: 0px 15px 0px 15px;margin: 0px 10px 0px 10px;"> 
                 <legend id="thelegend">&nbsp;&nbsp;&nbsp;Skin options 👑&nbsp;&nbsp;&nbsp;</legend>
                     <h2 style="font-size: 25px;">Outer Layer</h2>
                     <div id="outlayer-div">
@@ -107,7 +157,7 @@
               };
               toggleBgColor(this);
               updateLandscape();" checked></input>
-              <label for="button-toggle-landscape" style="margin-bottom: 0px;margin-top: 0px;margin-left: 0px;margin-right: 10px;"> Toggle landscape 🖼️</label>
+              <label for="button-toggle-landscape" style="margin-bottom: 0px;margin-top: 0px;margin-left: 0px;margin-right: 10px;"> Use landscape 🖼️</label>
             </div><br>
             <fieldset id="bg-color-picker-div" class="group" style="display: none;padding: 5px 15px 5px 15px;margin: 0px 85px 0px 85px;"> 
               Background color:<br>
@@ -139,18 +189,17 @@
       </div>
       <br>
       <br>
-      <div style="display: inline-flex;">
-        <div id="pixel-showcase-div" class="center-container">
-          <fieldset class="group" style="padding: 0px;width: 26%;align-content: center;"> 
-            <legend id="thelegend" style="padding-right: 0px;">&nbsp;&nbsp;&nbsp;Looking for a profile&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;picture like this one? 💎&nbsp;&nbsp;&nbsp;</legend> 
-            <canvas id="test" width="300px" height="300px" style="width: 250px;padding-bottom: 0px;cursor: pointer;" onclick="window.open('https://alonsoaliaga.com/mcpfp', '_blank');"></canvas>
+      <div style="justify-content: center;display: flex;">
+        <div class="center-container">
+          <fieldset class="group" style="display: flex; justify-content: center;border: 2px solid silver;padding: 0px 0px 5px 0px;width: 300px;align-content: center;"> 
+            <legend style="text-align: center;width: 70%;padding: 0px 15px 5px 15px;" id="thelegend">Looking for a pixelart like this one? 💎</legend> 
+            <img src="../assets/showcase/pixelart-showcase.png" style="height: 200px;padding-bottom: 0px;cursor: pointer;" onclick="window.open('https://alonsoaliaga.com/mcpfp', '_blank');">
           </fieldset>
-        </div>
-        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-        <div id="render-showcase-div" class="center-container">
-          <fieldset class="group" style="padding: 0px;width: 26%;align-content: center;"> 
-            <legend id="thelegend" style="padding-right: 0px;">&nbsp;&nbsp;&nbsp;Looking for a render&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;like this one? 💎&nbsp;&nbsp;&nbsp;</legend> 
-            <canvas id="render-test" width="300px" height="300px" style="width: 250px;padding-bottom: 0px;cursor: pointer;" onclick="window.open('https://alonsoaliaga.com/mc-renders', '_blank');"></canvas>
+        </div>&nbsp;&nbsp;
+        <div class="center-container">
+          <fieldset class="group" style="display: flex; justify-content: center;border: 2px solid silver;padding: 0px 0px 5px 0px;width: 300px;align-content: center;"> 
+            <legend style="text-align: center;width: 70%;padding: 0px 15px 5px 15px;" id="thelegend">Looking for a render like this one? 💎</legend> 
+            <img src="../assets/showcase/render-showcase.png" style="height: 200px;padding-bottom: 0px;cursor: pointer;" onclick="window.open('https://alonsoaliaga.com/mc-render', '_blank');">
           </fieldset>
         </div>
       </div>
@@ -187,5 +236,12 @@
   <script src="script.js"></script>
   <!-- <script src="script.js"></script> -->
 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5185973148525065"
+     crossorigin="anonymous"></script>
+
+     
+  <script src="resources.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gif.js.optimized@1.0.1/dist/gif.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gif.js@0.2.0/dist/gif.worker.js"></script>
   </body>
 </html>
