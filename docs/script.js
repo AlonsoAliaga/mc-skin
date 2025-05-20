@@ -1056,12 +1056,12 @@ const defaultGradients = {
     //document.body.style.overflow = "";
   }
   function screenshotCanvas() {
+    let screenshotPreview = document.getElementById("screenshot");
     let canvas = document.getElementById("skin_container");
     const dataURL = canvas.toDataURL('image/png'); // Get PNG data URL
     screenshotPreview.src = dataURL;             // Set the image source
     screenshotPreview.style.display = 'block';   // Show the image
     console.log('Screenshot taken and displayed!');
-    downloadProfile
   }
   function checkSite(window) {
     let search = window.location.search;
@@ -1327,14 +1327,14 @@ const defaultGradients = {
       var anchor = document.createElement("a");
       anchor.href = markedCanvas.toDataURL("image/png");
       let username = usernameInput?.value || "AlonsoAliaga";
-      anchor.download = `MinecraftPFP-${username}.png`;
+      anchor.download = `McSkin3DViewer-${username}.png`;
       anchor.click();
     }else{
       console.log(`Downloading without watermark..`)
       var anchor = document.createElement("a");
       anchor.href = siteCanvas.toDataURL("image/png");
       let username = usernameInput?.value || "AlonsoAliaga";
-      anchor.download = `MinecraftPFP-${username}.png`;
+      anchor.download = `McSkin3DViewer-${username}.png`;
       anchor.click();
     }
   }

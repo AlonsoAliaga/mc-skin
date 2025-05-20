@@ -78,7 +78,7 @@
                 console.log(`Speed: ${skinViewer.animation.speed}`)
             };
             modify(event);">⏸︎</button>
-            <button id="capture-canvas" class="button-small" style="padding: 0px 10px 5px 10x;min-width: fit-content;height: 50px;font-size: 20px;display: inline;margin: 5px;vertical-align: middle" onclick="downloadProfile();">Capture 📸</button>
+            <button id="capture-canvas" class="button-small" style="padding: 0px 10px 5px 10x;min-width: fit-content;height: 50px;font-size: 20px;display: inline;margin: 5px;vertical-align: middle" onclick="screenshotCanvas();">Capture 📸</button>
           </div>
           <div style="display: flex;align-items: center;">
             <button style="--hoverTransform: calc(0rem - 7.5rem / 18.5);--baseTransform: calc(0rem + 7.5rem / 18.5);" class="button-left" 
@@ -244,7 +244,10 @@
       </div>
     </div>
   </div>
-
+  <div style="position: absolute; left: 20px; bottom: 20px;">
+    <img id="screenshot" width="250px" src="https://raw.githubusercontent.com/AlonsoAliaga/alonsoaliaga.github.io/main/assets/img/apple-touch-icon.png"><br>
+    Screenshot
+  </div>
   <!-- <script src="jquery-1.6.1.min.js"></script> -->
   <script src="script.js"></script>
   <!-- <script src="script.js"></script> -->
