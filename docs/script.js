@@ -4,7 +4,8 @@ let skinViewer = new skinview3d.SkinViewer({
     height: 400,
     //skin: "img/skin.png"
 });
-let adLocked = ["run","crouch","fly"];
+let adLockedAnimations = ["run","crouch","fly"];
+let adLockedCapes = ["15th","million","minecraftexperience","snowman","home"];
 const skinParts = ["head", "body", "rightArm", "leftArm", "rightLeg", "leftLeg"];
 const skinPartsName = {
     "head":"Head",
@@ -282,6 +283,11 @@ function updateLandscape() {
     }
 }
 function selectCape(capeType) {
+    if(typeof adBlockEnabled != "undefined") {
+      if(adBlockEnabled) {
+        if(adLockedCapes.includes(capeType)) return;
+      }
+    }
     if(availableCapes[capeType]) {
         lastCapeIdentifier = capeType;
         updateCape(availableCapes[capeType].link);
@@ -292,7 +298,7 @@ function selectCape(capeType) {
 function selectAnimation(animationType) {
     if(typeof adBlockEnabled != "undefined") {
       if(adBlockEnabled) {
-        if(adLocked.includes(animationType)) return;
+        if(adLockedAnimations.includes(animationType)) return;
       }
     }
     if(availableAnimations[animationType]) {
@@ -1130,7 +1136,6 @@ const defaultGradients = {
       }catch(e){}
     }
     setTimeout(()=>{
-      return
       let href = window.location.href;
       if(!href.includes(atob("YWxvbnNvYWxpYWdhLmdpdGh1Yi5pbw=="))) {
         try{document.title = `Page stolen from https://${atob("YWxvbnNvYWxpYWdhLmdpdGh1Yi5pbw==")}`;}catch(e){}
@@ -2484,6 +2489,7 @@ const defaultGradients = {
       let element = document.createElement("div");
       element.classList.add("render-cape-card");
       //element.style.minWidth = "fit-content"
+      element.id = `cape-${capeType}`
       element.style.margin = "2px"
       element.innerHTML = `<img src="${capeData.image}" alt="${capeData.name}">
                 <div style="display:inline-block;min-width:fit-content;margin-top:-5px;font-size:15px;font-weight:bold;" class="render-label">${capeData.name}</div>`
@@ -2639,13 +2645,25 @@ const defaultGradients = {
     });
   }
   loadListener();
+  function lockCapesWithMessage(types,message,iconUrl='https://raw.githubusercontent.com/AlonsoAliaga/mc-renders/main/assets/images/lock-icon.png') {
+    let cards = types.map(n=> document.getElementById(`cape-${n}`)).filter(Boolean);
+    //console.log(secs)
+    for(let card of cards) {
+      //if(card.classList.contains('locked')) return;
+      //console.log(`M Seconds ${seconds}`);
+      card.classList.add('adlocked');
+      const ov = document.createElement('div');
+      ov.className = 'overlay';
+      ov.innerHTML = `<img src="${iconUrl}"><span>${message}</span>`;
+      card.append(ov);
+    }
+  }
   function lockAnimationsWithMessage(types,message,iconUrl='https://raw.githubusercontent.com/AlonsoAliaga/mc-renders/main/assets/images/lock-icon.png') {
     let cards = types.map(n=> document.getElementById(`animation-${n}`)).filter(Boolean);
     //console.log(secs)
     for(let card of cards) {
       //if(card.classList.contains('locked')) return;
       //console.log(`M Seconds ${seconds}`);
-      card.classList.add('locked');
       card.classList.add('adlocked');
       const ov = document.createElement('div');
       ov.className = 'overlay';
@@ -2656,15 +2674,16 @@ const defaultGradients = {
   function lockAnimations(btn,secs, iconUrl='https://raw.githubusercontent.com/AlonsoAliaga/mc-renders/main/assets/images/lock-icon.png') {
     let cards = [];
     if(!btn) {
-      cards = document.querySelectorAll(".render-card");
+      cards = Object.keys(availableAnimations).map(n=> document.getElementById(`animation-${n}`)).filter(Boolean);
+      //cards = document.querySelectorAll(".render-card");
+      //console.log("Locking: "+cards.map(c=>c.id))
     }else{
       cards.push(btn);
     }
-    //console.log(secs)
     globalModelsLock = true;
     for(let card of cards) {
-      if(card.classList.contains('locked')) return;
-      if(card.classList.contains('adlocked')) return;
+      if(card.classList.contains('locked')) continue;
+      if(card.classList.contains('adlocked')) continue;
       let seconds = secs;
       //console.log(`M Seconds ${seconds}`);
       card.classList.add('locked');
@@ -2688,7 +2707,7 @@ const defaultGradients = {
     let cards = document.querySelectorAll(".render-card");
     globalModelsLock = true;
     for(let card of cards) {
-      if(card.classList.contains('locked')) return;
+      if(card.classList.contains('locked')) continue;
       let seconds = secs;
       console.log(`M Seconds ${seconds}`);
       card.classList.add('locked');
@@ -2712,7 +2731,7 @@ const defaultGradients = {
     let crops = document.querySelectorAll(".cool-button");
     globalCropsLock = true;
     for(let crop of crops) {
-      if(crop.classList.contains('locked')) return;
+      if(crop.classList.contains('locked')) continue;
       console.log(`C Seconds ${seconds}`);
       let seconds = secs;
       crop.classList.add('locked');
@@ -2780,5 +2799,6 @@ document.addEventListener("DOMContentLoaded", () => {
   checkSite(window);
 });
 function processAds() {
-  lockAnimationsWithMessage(adLocked,`Disable AdBlock to access this animation!`)
+  lockAnimationsWithMessage(adLockedAnimations,`Disable AdBlock to access this animation!`)
+  lockCapesWithMessage(adLockedCapes,`Disable AdBlock to access this cape!`)
 }
