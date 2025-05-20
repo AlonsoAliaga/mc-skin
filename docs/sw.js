@@ -1,5 +1,5 @@
-const BLOCKED_URL_REGEX = /https:\/\/*\.imgur\.com/i;
-const ALLOWED_REFERRER_DOMAIN = 'alonsolialiga.github.io'; // The domain you want to allow blocking from
+const BLOCKED_URL_REGEX = /https:\/\/.*\.imgur\.com/i;
+const ALLOWED_REFERRER_DOMAIN = 'alonsoaliaga.github.io';
 
 self.addEventListener('fetch', function(event) {
     const requestUrl = event.request.url;
@@ -16,15 +16,21 @@ self.addEventListener('fetch', function(event) {
     } catch (e) {
         console.error("Error parsing referrer URL:", e);
     }
-
-    // Check if the request is to imgur.com AND the referrer domain matches your allowed domain
-    if (BLOCKED_URL_REGEX.test(requestUrl) && referrerDomain.includes(ALLOWED_REFERRER_DOMAIN)) {
-        console.log(`Service Worker Blocked (referrer: ${referrerUrl}): ${requestUrl}`);
-        event.respondWith(
-            new Response(null, { status: 200, statusText: 'Blocked by Service Worker' })
-        );
-    } else {
-        // For all other requests, proceed normally
+    if(referrerDomain.includes(ALLOWED_REFERRER_DOMAIN)) {
         event.respondWith(fetch(event.request));
+    }else{
+        // Check if the request is to imgur.com AND the referrer domain matches your allowed domain
+        console.log(BLOCKED_URL_REGEX.test(requestUrl))
+        console.log(!referrerDomain.includes(ALLOWED_REFERRER_DOMAIN))
+        console.log(BLOCKED_URL_REGEX.test(requestUrl))
+        if (BLOCKED_URL_REGEX.test(requestUrl) && !referrerDomain.includes(ALLOWED_REFERRER_DOMAIN)) {
+            console.log(`Service Worker Blocked (referrer: ${referrerUrl}): ${requestUrl}`);
+            event.respondWith(
+                new Response(null, { status: 200, statusText: 'Blocked by Service Worker' })
+            );
+        } else {
+            // For all other requests, proceed normally
+            event.respondWith(fetch(event.request));
+        }
     }
 });
