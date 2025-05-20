@@ -69,37 +69,37 @@ const availableAnimations = {
 	idle: {
         name: "Idle",
         animation: new skinview3d.IdleAnimation(),
-        image:"./assets/images/animations/idle.gif",
+        image:"https://raw.githubusercontent.com/AlonsoAliaga/mc-skin/main/assets/images/animations/idle.gif",
     },
 	walk: {
         name: "Walking",
         animation: new skinview3d.WalkingAnimation(),
-        image:"./assets/images/animations/walk.gif",
+        image:"https://raw.githubusercontent.com/AlonsoAliaga/mc-skin/main/assets/images/animations/walk.gif",
     },
 	run: {
         name: "Running",
         animation: new skinview3d.RunningAnimation(),
-        image:"./assets/images/animations/run.gif",
+        image:"https://raw.githubusercontent.com/AlonsoAliaga/mc-skin/main/assets/images/animations/run.gif",
     },
 	fly: {
         name: "Flying",
         animation: new skinview3d.FlyingAnimation(),
-        image:"./assets/images/animations/fly.png",
+        image:"https://raw.githubusercontent.com/AlonsoAliaga/mc-skin/main/assets/images/animations/fly.png",
     },
 	wave: {
         name: "Waving",
         animation: new skinview3d.WaveAnimation(),
-        image:"./assets/images/animations/wave.gif",
+        image:"https://raw.githubusercontent.com/AlonsoAliaga/mc-skin/main/assets/images/animations/wave.gif",
     },
 	crouch: {
         name: "Crouching",
         animation: new skinview3d.CrouchAnimation(),
-        image:"./assets/images/animations/crouch.gif",
+        image:"https://raw.githubusercontent.com/AlonsoAliaga/mc-skin/main/assets/images/animations/crouch.gif",
     },
 	hit: {
         name: "Hitting",
         animation: new skinview3d.HitAnimation(),
-        image:"./assets/images/animations/hit.gif",
+        image:"https://raw.githubusercontent.com/AlonsoAliaga/mc-skin/main/assets/images/animations/hit.gif",
     },
 };
 // Remove the animation
@@ -111,8 +111,11 @@ function updateSkinRender() {
     console.log(`Loading 3D render for: ${username}`);
     skinViewer.loadSkin(`https://mc-heads.net/skin/${username}.png`);
 }
-function updateCape() {
+function updateCape(forceUUID) {
   let capeUrl = "https://crafatar.com/capes/853c80ef3c3749fdaa49938b674adae6";
+  if(forceUUID && typeof lastUsernameToUUID != "undefined") {
+    capeUrl = `https://crafatar.com/capes/${lastUsernameToUUID.replace(/-/g,"")}`;
+  } 
   if(capeMode == 0) { //Nothing
     skinViewer.loadCape(null);
   }else if(capeMode == 1) { //Cape
@@ -2298,7 +2301,7 @@ const defaultGradients = {
       let animationData = availableAnimations[animationType];
       let element = document.createElement("div");
       element.classList.add("render-card");
-      let link = animationData.image !== "" ? animationData.image : `https://raw.githubusercontent.com/AlonsoAliaga/mc-skin/main/assets/images/animations/${animationType}.gif`;
+      let link = animationData.image != "" ? animationData.image : `https://raw.githubusercontent.com/AlonsoAliaga/mc-skin/main/assets/images/animations/${animationType}.gif`;
       element.innerHTML = `<img src="${link}" alt="${animationData.name} Model">
                 <div style="margin-top:-5px;font-size:20px;font-weight:bold;" class="render-label">${animationData.name}</div>`
       element.onclick = function(){selectAnimation(animationType)}
