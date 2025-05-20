@@ -102,31 +102,15 @@
         <fieldset class="group" style="padding: 0px;"> 
           <legend id="thelegend">&nbsp;&nbsp;&nbsp;Select your options 🎮&nbsp;&nbsp;&nbsp;</legend> 
           <ul id="fonts-table" style="font-size: 18px;">
-            Cape mode: <div id="button-toggle-cape-div" style="width: 30%;display: inline-block;font-family: MinecraftBold;margin: 0px 2px 2px 2px;padding: 5px 10px 5px 10px;" class="darkbuttonboxes">
-              <input class="hidden-box" data-cape-mode="0" type="checkbox" id="button-toggle-cape" onclick="function toggleCape() {
-                //console.log(capeMode)
-                let oldMode = capeMode;
-                capeMode++
-                if(capeMode > 2) {
-                  capeMode = 0;
-                }
-                //console.log(`Mode ${oldMode} -> ${capeMode}`);
-                document.getElementById('cape-text').innerText = `${(capeMode == 0 ? `No cape ❌` : (capeMode == 1 ? `Cape mode 🥻` : `Elytras mode 🪽`))}`;
-                if(capeMode == 0) {
-                  document.getElementById('cape-picker-div').style.display = 'none';
-                }else{
-                  document.getElementById('cape-picker-div').style.display = null;
-                }
-              }
-              toggleCape();
-              updateCape();"></input>
-              <label id="cape-text" for="button-toggle-cape" style="margin-bottom: 0px;margin-top: 0px;margin-left: 0px;margin-right: 10px;"> Cape mode 🥻</label>
-            </div><br>
-            <fieldset id="cape-picker-div" class="group" style="padding: 5px 15px 5px 15px;margin: 0px 85px 0px 85px;"> 
-              Pick your cape:<br>
-              <div id="cape-picker" class="group button-container" style="display: grid;grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));gap: 10px;width: 100%;display: flex;font-size: 15px;font-family: MinecraftBold;margin: 0px 2px 2px 2px;padding: 5px 10px 5px 10px;">
-              </div>
-              <span style="font-size: 15px;">More capes coming soon..</span>
+            <fieldset class="group" style="padding: 0px 15px 0px 15px;margin: 0px 10px 0px 10px;"> 
+                <legend id="thelegend">&nbsp;&nbsp;&nbsp;Skin options 👑&nbsp;&nbsp;&nbsp;</legend>
+                    <h2 style="font-size: 20px;">Outer Layer</h2>
+                    <div id="outlayer-div">
+                    </div><br>
+                    <h2 style="font-size: 20px;">Inner Layer</h2>
+                    <div id="inlayer-div">
+                    </div>
+                <br>
             </fieldset>
             Speed: 
             <button class="button-small" style="display: inline;margin: 10px;vertical-align: middle" onclick="function modify(event) {
@@ -138,7 +122,7 @@
                 document.getElementById('speed').innerText = Math.min(100,parseInt(+document.getElementById('speed').innerText * 10) + ((event.altKey ||  event.shiftKey) ? 2 : 1)) / 10;
             }
             modify(event);updateSpeed();">⯈</button><br>
-            Pause/Unpause animation: <button id="control2" class="button-small" style="padding-bottom: 5px;width: 50px;height: 50px;font-size: 30px;display: inline;margin: 10px;vertical-align: middle" onclick="function modify(event) {
+            Pause/Unpause animation: <button id="control2" class="button-small" style="padding-bottom: 5px;width: 50px;height: 50px;font-size: 30px;display: inline;margin: 6px;vertical-align: middle" onclick="function modify(event) {
                 if(skinViewer.animation.paused) {
                   skinViewer.animation.paused = false;
                   document.getElementById('control1').innerText = '⏸︎';
@@ -154,16 +138,6 @@
             <br>
             <!-- Start recording: <button id="control2" class="button-small" style="padding-bottom: 5px;width: 50px;height: 50px;font-size: 30px;display: inline;margin: 10px;vertical-align: middle" onclick="startRecording()">🔴</button>
             Stop recording: <button id="control2" class="button-small" style="padding-bottom: 5px;width: 50px;height: 50px;font-size: 30px;display: inline;margin: 10px;vertical-align: middle" onclick="stopRecording()">⏸︎</button> -->
-            <fieldset class="group" style="padding: 0px 15px 0px 15px;margin: 0px 10px 0px 10px;"> 
-                <legend id="thelegend">&nbsp;&nbsp;&nbsp;Skin options 👑&nbsp;&nbsp;&nbsp;</legend>
-                    <h2 style="font-size: 25px;">Outer Layer</h2>
-                    <div id="outlayer-div">
-                    </div><br>
-                    <h2 style="font-size: 25px;">Inner Layer</h2>
-                    <div id="inlayer-div">
-                    </div>
-                <br>
-            </fieldset><br>
             <div id="rotate-div" style="width: 50%;display: inline-block;font-family: MinecraftBold;margin: 0px 2px 2px 2px;padding: 5px 10px 5px 10px;" class="darkbuttonboxes">
               <input type="checkbox" id="rotate-toggle" onclick="function toggleRotate(a){
                 if(a.checked) {
@@ -197,7 +171,33 @@
             <div id="button-remove-watermark-download-div" style="width: 50%;display: none;font-family: MinecraftBold;margin: 2px 2px 2px 2px;padding: 5px 10px 5px 10px;" class="darkbuttonboxes">
               <input type="checkbox" name="button-remove-watermark-download" id="button-remove-watermark-download" onclick="toggleWatermark(this);"></input>
               <label for="button-remove-watermark-download" style="margin-bottom: 0px;margin-top: 0px;margin-left: 0px;margin-right: 10px;"> Remove watermark in download? 👓</label>
-            </div>
+            </div><br>
+            Cape mode: <div id="button-toggle-cape-div" style="width: 30%;display: inline-block;font-family: MinecraftBold;margin: 0px 2px 2px 2px;padding: 5px 10px 5px 10px;" class="darkbuttonboxes">
+              <input class="hidden-box" data-cape-mode="0" type="checkbox" id="button-toggle-cape" onclick="function toggleCape() {
+                //console.log(capeMode)
+                let oldMode = capeMode;
+                capeMode++
+                if(capeMode > 2) {
+                  capeMode = 0;
+                }
+                //console.log(`Mode ${oldMode} -> ${capeMode}`);
+                document.getElementById('cape-text').innerText = `${(capeMode == 0 ? `No cape ❌` : (capeMode == 1 ? `Cape mode 🥻` : `Elytras mode 🪽`))}`;
+                if(capeMode == 0) {
+                  document.getElementById('cape-picker-div').style.display = 'none';
+                }else{
+                  document.getElementById('cape-picker-div').style.display = null;
+                }
+              }
+              toggleCape();
+              updateCape();"></input>
+              <label id="cape-text" for="button-toggle-cape" style="margin-bottom: 0px;margin-top: 0px;margin-left: 0px;margin-right: 10px;"> Cape mode 🥻</label>
+            </div><br>
+            <fieldset id="cape-picker-div" class="group" style="padding: 5px 15px 5px 15px;margin: 0px 85px 0px 85px;"> 
+              Pick your cape:<br>
+              <div id="cape-picker" class="group button-container" style="display: grid;grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));gap: 10px;width: 100%;display: flex;font-size: 15px;font-family: MinecraftBold;margin: 0px 2px 2px 2px;padding: 5px 10px 5px 10px;">
+              </div>
+              <span style="font-size: 15px;">More capes coming soon..</span>
+            </fieldset>
             <!-- <br> -->
           </ul> 
         </fieldset><br>
