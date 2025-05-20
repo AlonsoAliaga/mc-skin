@@ -922,9 +922,10 @@ label {
   .adlocked .overlay {
 	position: absolute;
 	inset: 0;
-	background: rgba(255,255,255,0.8);
+	background: rgba(66, 66, 66, 0.8);
 	display: flex;
 	flex-direction: column;
+	border-radius: 8px;
 	align-items: center;
 	justify-content: center;
 	cursor: not-allowed;
@@ -935,7 +936,8 @@ label {
 	opacity: 0.6;
   }
   .adlocked .overlay span {
+	padding: 5px;
 	margin-top: 6px;
 	font-size: 0.9rem;
-	color: #333;
+	color: #c7c7c7;
   }
