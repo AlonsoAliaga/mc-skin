@@ -68,12 +68,12 @@ const skinLayers = ["innerLayer", "outerLayer"];
 const availableCapes = {
   "15th": {
     name: "15th Birthday 🎂",
-    image: "https://i.imgur.com/ydrIKpz.png",
+    image: "https://i.imgur.com/jWFfwfQ.png",
     link: "https://i.imgur.com/g5npzTh.png"
   },
   "million": {
     name: "Million Customer ⭐",
-    image: "https://i.imgur.com/jWFfwfQ.png",
+    image: "https://i.imgur.com/ydrIKpz.png",
     link: "https://i.imgur.com/WjdvpNG.png"
   }
 }
@@ -123,10 +123,10 @@ function updateSkinRender() {
     console.log(`Loading 3D render for: ${username}`);
     skinViewer.loadSkin(`https://mc-heads.net/skin/${username}.png`);
 }
-function updateCape(forceUUID) {
+function updateCape(capeLink) {
   let capeUrl = "https://crafatar.com/capes/853c80ef3c3749fdaa49938b674adae6";
-  if(forceUUID && typeof lastObtainedUUID != "undefined") {
-    capeUrl = `https://crafatar.com/capes/${lastObtainedUUID.replace(/-/g,"")}`;
+  if(capeLink) {
+    capeUrl = capeLink;
   } 
   if(capeMode == 0) { //Nothing
     skinViewer.loadCape(null);
@@ -183,7 +183,7 @@ function updateLandscape() {
 }
 function selectCape(capeType) {
     if(availableCapes[capeType]) {
-        skinViewer.loadCape(availableCapes[capeType].link);
+        updateCape(availableCapes[capeType].link);
         updateSpeed();
         //lockCapes(undefined,5);
     }
