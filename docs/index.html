@@ -122,6 +122,7 @@
               Pick your cape:<br>
               <div id="cape-picker" class="group button-container" style="display: grid;grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));gap: 10px;width: 100%;display: flex;font-size: 15px;font-family: MinecraftBold;margin: 0px 2px 2px 2px;padding: 5px 10px 5px 10px;">
               </div>
+              <span style="font-size: 15px;">More capes coming soon..</span>
             </fieldset>
             Speed: 
             <button class="button-small" style="display: inline;margin: 10px;vertical-align: middle" onclick="function modify(event) {
@@ -255,5 +256,16 @@
   <script src="resources.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gif.js.optimized@1.0.1/dist/gif.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gif.js@0.2.0/dist/gif.worker.js"></script>
+  <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('./sw.js').then(function(registration) {
+            console.log('ServiceWorker registration successful with scope: ', registration.scope);
+          }, function(err) {
+            console.log('ServiceWorker registration failed: ', err);
+          });
+        });
+      }
+  </script>
   </body>
 </html>

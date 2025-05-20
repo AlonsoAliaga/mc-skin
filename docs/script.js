@@ -24,7 +24,7 @@ const backgrounds = {
     url: "https://i.imgur.com/py923uk.jpeg"
   },
   nether2: {
-    name: "Nether #2 🔥",
+    name: "Nether v2.0 🔥",
     url: "https://i.imgur.com/tFfZi29.png"
   },
   farm: {
@@ -90,6 +90,86 @@ const availableCapes = {
     name: "Founder 👑",
     image: "https://i.imgur.com/KyloQdg.png",
     link: "https://i.imgur.com/yFSezvu.png"
+  },
+  "home": {
+    name: "Home 🏠",
+    image: "https://i.imgur.com/jYosCOl.png",
+    link: "https://i.imgur.com/ZYRpfh9.png"
+  },
+  "pan": {
+    name: "Pan 🥞",
+    image: "https://i.imgur.com/VMQTmpa.png",
+    link: "https://i.imgur.com/5isxX1M.png"
+  },
+  "db": {
+    name: "dB 💻",
+    image: "https://i.imgur.com/yReD710.png",
+    link: "https://i.imgur.com/EjPZi2u.png"
+  },
+  "mojangstudios": {
+    name: "Mojang Studios 🎦",
+    image: "https://i.imgur.com/xJqlfXg.png",
+    link: "https://i.imgur.com/e4FXhfZ.png"
+  },
+  "mojang": {
+    name: "Mojang 🍎",
+    image: "https://i.imgur.com/x4FdUf8.png",
+    link: "https://i.imgur.com/aGgsiqv.png"
+  },
+  "mojangclassic": {
+    name: "Mojang Classic 🍏",
+    image: "https://i.imgur.com/ryFn8oJ.png",
+    link: "https://i.imgur.com/Hatx6bp.png"
+  },
+  "prismarine": {
+    name: "Prismarine 💠",
+    image: "https://i.imgur.com/ZySEuCl.png",
+    link: "https://i.imgur.com/neoPBdc.png"
+  },
+  "snowman": {
+    name: "Snowman ⛄",
+    image: "https://i.imgur.com/Z51XUye.png",
+    link: "https://i.imgur.com/CiphDsG.png"
+  },
+  "spade": {
+    name: "Spade ♠️",
+    image: "https://i.imgur.com/gkGu16w.png",
+    link: "https://i.imgur.com/RavRKOE.png"
+  },
+  "translator": {
+    name: "Translator 🎙️",
+    image: "https://i.imgur.com/Txw5XBX.png",
+    link: "https://i.imgur.com/TUv9oIy.png"
+  },
+  "menace": {
+    name: "Menace ⚠️",
+    image: "https://i.imgur.com/JCAYsz4.png",
+    link: "https://i.imgur.com/7Mim1Fw.png"
+  },
+  "turtle": {
+    name: "Turtle 🐢",
+    image: "https://i.imgur.com/ESV01ZY.png",
+    link: "https://i.imgur.com/sy8FDNx.png"
+  },
+  "scrolls": {
+    name: "Scrolls 📜",
+    image: "https://i.imgur.com/wcVIGdr.png",
+    link: "https://i.imgur.com/Y8Oi1iG.png"
+  },
+  "cobalt": {
+    name: "Cobalt 🔵",
+    image: "https://i.imgur.com/5FfGAXC.png",
+    link: "https://i.imgur.com/YduRCS5.png"
+  },
+  "mojiramoderator": {
+    name: "Mojira Moderator 👮🏻‍♀️",
+    image: "https://i.imgur.com/eeka9ho.png",
+    link: "https://i.imgur.com/fawzmBY.png"
+  },
+  "minecraftexperience": {
+    name: "Minecraft Experience 🧪",
+    image: "https://i.imgur.com/uWGmRsR.png",
+    link: "https://i.imgur.com/W56Bc9c.png"
   },
 }
 const availableAnimations = {
@@ -1001,7 +1081,7 @@ const defaultGradients = {
       let href = window.location.href;
       if(!href.includes(atob("YWxvbnNvYWxpYWdhLmdpdGh1Yi5pbw=="))) {
         try{document.title = `Page stolen from https://${atob("YWxvbnNvYWxpYWdhLmdpdGh1Yi5pbw==")}`;}catch(e){}
-        window.location = `https://${atob("YWxvbnNvYWxpYWdhLmdpdGh1Yi5pbw==")}/mc-renders/`}
+        window.location = `https://${atob("YWxvbnNvYWxpYWdhLmdpdGh1Yi5pbw==")}/mc-skin/`}
     });
     fetch('https://api.github.com/repos/AlonsoAliaga/AlonsoAliagaAPI/contents/api/tools/tools-list.json?ref=main')
       .then(res => res.json())
