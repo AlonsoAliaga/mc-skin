@@ -1055,6 +1055,14 @@ const defaultGradients = {
     document.getElementById("maintenance-overlay").style.display = "none";
     //document.body.style.overflow = "";
   }
+  function screenshotCanvas() {
+    let canvas = document.getElementById("skin_container");
+    const dataURL = canvas.toDataURL('image/png'); // Get PNG data URL
+    screenshotPreview.src = dataURL;             // Set the image source
+    screenshotPreview.style.display = 'block';   // Show the image
+    console.log('Screenshot taken and displayed!');
+    downloadProfile
+  }
   function checkSite(window) {
     let search = window.location.search;
     if(typeof search !== "undefined" && search.length > 0) {
@@ -1298,7 +1306,7 @@ const defaultGradients = {
       markedCanvas.width = siteCanvas.width;
       markedCanvas.height = siteCanvas.height + additonalBoderBottom + additionalHeight;
       let markedCtx = markedCanvas.getContext("2d");
-      const text = "Generated on https://alonsoaliaga.com/mc-renders";
+      const text = "Generated on https://alonsoaliaga.com/mc-skin";
       markedCtx.fillStyle = "#302a3b"; // Set the fill color to white
       markedCtx.fillRect(0, siteCanvas.height + additonalBoderBottom, siteCanvas.width, additionalHeight);
       let fontSize = 50; // Initial font size
@@ -2064,7 +2072,8 @@ const defaultGradients = {
   let shadingBuffer;
   const backgroundCanvas = document.getElementById("background-canvas");
   const skinCanvas = document.getElementById("skin-canvas");
-  const siteCanvas = document.getElementById("final-canvas");
+  //const siteCanvas = document.getElementById("final-canvas");
+  const siteCanvas = document.getElementById("skin_container");
   const markedCanvas = document.getElementById("marked-canvas");
   async function addListeners() {
       failedBuffer = await loadImage("https://raw.githubusercontent.com/AlonsoAliaga/mcpfp/main/assets/images/notFound.png");
@@ -2144,8 +2153,8 @@ const defaultGradients = {
           skinType = 1;
           loadedSkinBuffer = img;
           //console.log(`Uploaded custom image: ${file.name} | ${img.width}px x ${img.height}px`);
-          skinViewer.loadSkin(img)
-          updateSkin(true);
+          skinViewer.loadSkin(URL.createObjectURL(file))
+          //updateSkin(true);
         };
       });
   
