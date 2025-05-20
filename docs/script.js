@@ -65,6 +65,18 @@ const backgrounds = {
   }
 }
 const skinLayers = ["innerLayer", "outerLayer"];
+const availableCapes = {
+  "15th": {
+    name: "15th Birthday 🎂",
+    image: "https://i.imgur.com/ydrIKpz.png",
+    link: "https://i.imgur.com/g5npzTh.png"
+  },
+  "million": {
+    name: "Million Customer ⭐",
+    image: "https://i.imgur.com/jWFfwfQ.png",
+    link: "https://i.imgur.com/WjdvpNG.png"
+  }
+}
 const availableAnimations = {
 	idle: {
         name: "Idle",
@@ -113,8 +125,8 @@ function updateSkinRender() {
 }
 function updateCape(forceUUID) {
   let capeUrl = "https://crafatar.com/capes/853c80ef3c3749fdaa49938b674adae6";
-  if(forceUUID && typeof lastUsernameToUUID != "undefined") {
-    capeUrl = `https://crafatar.com/capes/${lastUsernameToUUID.replace(/-/g,"")}`;
+  if(forceUUID && typeof lastObtainedUUID != "undefined") {
+    capeUrl = `https://crafatar.com/capes/${lastObtainedUUID.replace(/-/g,"")}`;
   } 
   if(capeMode == 0) { //Nothing
     skinViewer.loadCape(null);
@@ -167,6 +179,13 @@ function updateLandscape() {
     }else{
       skinViewer.background = document.getElementById("bg-color-picker").value;
       landscapeTitle.innerText = `Color ${document.getElementById("bg-color-picker").value}`;
+    }
+}
+function selectCape(capeType) {
+    if(availableCapes[capeType]) {
+        skinViewer.loadCape(availableCapes[capeType].link);
+        updateSpeed();
+        //lockCapes(undefined,5);
     }
 }
 function selectAnimation(animationType) {
@@ -2294,6 +2313,25 @@ const defaultGradients = {
     },500);
     */
   }
+  function loadCapes() {
+    let capesDiv = document.getElementById("cape-picker");
+    let toAddCustom = [];
+    for(let capeType of Object.keys(availableCapes)) {
+      let capeData = availableCapes[capeType];
+      let element = document.createElement("div");
+      element.classList.add("render-card");
+      element.style.minWidth = "fit-content"
+      element.style.margin = "2px"
+      element.innerHTML = `<img src="${capeData.image}" alt="${capeData.name}">
+                <div style="min-width:fit-content;margin-top:-5px;font-size:15px;font-weight:bold;" class="render-label">${capeData.name}</div>`
+      element.onclick = function(){selectCape(capeType)}
+      if(capeData.custom) {
+        toAddCustom.push(element);
+      }else{
+        capesDiv.appendChild(element);
+      }
+    }
+  }
   function loadAnimations() {
     let modelsDiv = document.getElementById("animations-cards");
     let toAddCustom = [];
@@ -2556,6 +2594,7 @@ function loadPage() {
 startRender();
 //updateRenderTest("AlonsoAliaga")
 loadAnimations();
+loadCapes();
 
 document.addEventListener("DOMContentLoaded", () => {
   loadCounter();

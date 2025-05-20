@@ -108,11 +108,21 @@
                 }
                 console.log(`Mode ${oldMode} -> ${capeMode}`);
                 document.getElementById('cape-text').innerText = `${(capeMode == 0 ? `No cape ❌` : (capeMode == 1 ? `Cape mode 🥻` : `Elytras mode 🪽`))}`;
+                if(capeMode == 0) {
+                  document.getElementById('cape-picker-div').style.display = 'none';
+                }else{
+                  document.getElementById('cape-picker-div').style.display = null;
+                }
               }
               toggleCape();
               updateCape(true);"></input>
               <label id="cape-text" for="button-toggle-cape" style="margin-bottom: 0px;margin-top: 0px;margin-left: 0px;margin-right: 10px;"> Cape mode 🥻</label>
             </div><br>
+            <fieldset id="cape-picker-div" class="group" style="display: none;padding: 5px 15px 5px 15px;margin: 0px 85px 0px 85px;"> 
+              Pick your cape:<br>
+              <div id="cape-picker" style="width: 50%;display: flex;font-size: 15px;font-family: MinecraftBold;margin: 0px 2px 2px 2px;padding: 5px 10px 5px 10px;">
+              </div>
+            </fieldset>
             Speed: 
             <button class="button-small" style="display: inline;margin: 10px;vertical-align: middle" onclick="function modify(event) {
                 document.getElementById('speed').innerText = Math.min(100,parseInt(+document.getElementById('speed').innerText * 10) - ((event.altKey ||  event.shiftKey) ? 2 : 1)) / 10;
