@@ -65,7 +65,7 @@
         <br>
         <div style="display: inline-block;">
           <div>
-            <button id="bgtitle" style="font-size: 20px;padding: 5px 15px 10px 15px;" class="darkbuttonboxes">Texto</button><button id="control1" class="button-small" style="padding-bottom: 5px;width: 50px;height: 50px;font-size: 30px;display: inline;margin: 10px;vertical-align: middle" onclick="function modify(event) {
+            <button id="bgtitle" style="font-size: 20px;padding: 5px 15px 10px 15px;" class="darkbuttonboxes">Texto</button><button id="control1" class="button-small" style="padding-bottom: 5px;width: 50px;height: 50px;font-size: 30px;display: inline;margin: 5px;vertical-align: middle" onclick="function modify(event) {
                 if(skinViewer.animation.paused) {
                   skinViewer.animation.paused = false;
                   document.getElementById('control1').innerText = '⏸︎';
@@ -78,7 +78,7 @@
                 console.log(`Speed: ${skinViewer.animation.speed}`)
             };
             modify(event);">⏸︎</button>
-            <button id="capture-canvas" class="button-small" style="padding-bottom: 5px;width: 50px;height: 50px;font-size: 30px;display: inline;margin: 10px;vertical-align: middle" onclick="sdownloadProfile();">Capture 📸</button>
+            <button id="capture-canvas" class="button-small" style="padding: 0px 10px 5px 10x;min-width: fit-content;height: 50px;font-size: 20px;display: inline;margin: 5px;vertical-align: middle" onclick="downloadProfile();">Capture 📸</button>
           </div>
           <div style="display: flex;align-items: center;">
             <button style="--hoverTransform: calc(0rem - 7.5rem / 18.5);--baseTransform: calc(0rem + 7.5rem / 18.5);" class="button-left" 
@@ -86,6 +86,7 @@
               <p style="margin-left:0;padding-right: 0px;" class="button-left">&lt;</p>
             </button>
             <canvas id="skin_container"></canvas>
+            <canvas style="display: none;" id="marked-canvas"></canvas>
             <button style="--hoverTransform: calc(0rem + 7.5rem / 18.5);--baseTransform: calc(0rem - 7.5rem / 18.5);" class="button-right"
               onclick="nextPanorama()">
               <p style="margin-left:0rem;padding-left: 18px;" class="button-right">&gt;</p>
