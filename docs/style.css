@@ -211,19 +211,19 @@ label {
 	}
 	@font-face {
 	   font-family: MinecraftRegular;
-	   src: url(https://raw.githubusercontent.com/AlonsoAliaga/generator/main/assets/fonts/MinecraftRegular.otf);
+	   src: url(https://raw.githubusercontent.com/AlonsoAliaga/mc-skin/main/assets/fonts/MinecraftRegular.otf);
 	}
 	@font-face {
 	   font-family: MinecraftBold;
-	   src: url(https://raw.githubusercontent.com/AlonsoAliaga/generator/main/assets/fonts/MinecraftBold.otf);
+	   src: url(https://raw.githubusercontent.com/AlonsoAliaga/mc-skin/main/assets/fonts/MinecraftBold.otf);
 	}
 	@font-face {
 	   font-family: MinecraftItalic;
-	   src: url(https://raw.githubusercontent.com/AlonsoAliaga/generator/main/assets/fonts/MinecraftItalic.otf);
+	   src: url(https://raw.githubusercontent.com/AlonsoAliaga/mc-skin/main/assets/fonts/MinecraftItalic.otf);
 	}
 	@font-face {
 	   font-family: MinecraftBoldItalic;
-	   src: url(https://raw.githubusercontent.com/AlonsoAliaga/generator/main/assets/fonts/MinecraftBoldItalic.otf);
+	   src: url(https://raw.githubusercontent.com/AlonsoAliaga/mc-skin/main/assets/fonts/MinecraftBoldItalic.otf);
 	}
 	@font-face {
 	  font-family: 'Quicksand';
@@ -781,6 +781,41 @@ label {
   }
   
   /* Styles for the render card */
+  .render-cape-card {
+	display: flex;
+	flex-direction: column;       /* Stack items vertically */
+	align-items: center;          /* Center items horizontally */
+	justify-content: center;      /* Center items vertically */
+	border: 1px solid #ccc;       /* Optional: for visualization */
+  
+	width: 100px;
+	padding: 16px;
+	border-radius: 12px;
+	background: #f9f9f9;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+	text-align: center;
+	cursor: pointer;
+	transition: transform 0.2s, box-shadow 0.2s;
+	vertical-align: middle;
+  }
+  /* Hover effect for the card */
+  .render-cape-card:hover {
+	transform: translateY(-5px);
+	box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Styles for the image inside the card */
+  .render-cape-card img {
+	max-width: 100%;
+	height: auto;
+	margin-bottom: 10px;          /* Space between image and text */
+  
+	/*width: 100%;*/
+	height: auto;
+	max-height: 300px;
+	border-radius: 8px;
+  }
+  
   .render-card {
 	display: flex;
 	flex-direction: column;       /* Stack items vertically */

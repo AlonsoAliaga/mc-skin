@@ -31,7 +31,7 @@
     </div>
     <div class="content">
       <div class="header">
-        <h1 style="font-family: MinecraftBold;"><a href="https://alonsoaliaga.com/mc-skin" rel="noopener" target="_blank">MC 3D Skin</a> Viewer</h1>
+        <h1 style="font-family: MinecraftBold;"><a href="https://alonsoaliaga.com/mc-skin" rel="noopener" target="_blank">MC Skin</a> 3D Viewer</h1>
         <h2 style="font-size: 20px; color: rgb(255, 71, 71)">Use Google Chrome or Opera for a better experience. Edge is reported as not compatible!</h2>
         <div class="options" style="padding: 10px 10px 10px 10px; margin-bottom: 10px;">
           <h2 class="rainbow" style="font-size:25px; color:transparent">How is this different from other generators?</h2>
@@ -100,13 +100,13 @@
           <ul id="fonts-table" style="font-size: 18px;">
             Cape mode: <div id="button-toggle-cape-div" style="width: 30%;display: inline-block;font-family: MinecraftBold;margin: 0px 2px 2px 2px;padding: 5px 10px 5px 10px;" class="darkbuttonboxes">
               <input class="hidden-box" data-cape-mode="0" type="checkbox" id="button-toggle-cape" onclick="function toggleCape() {
-                console.log(capeMode)
+                //console.log(capeMode)
                 let oldMode = capeMode;
                 capeMode++
                 if(capeMode > 2) {
                   capeMode = 0;
                 }
-                console.log(`Mode ${oldMode} -> ${capeMode}`);
+                //console.log(`Mode ${oldMode} -> ${capeMode}`);
                 document.getElementById('cape-text').innerText = `${(capeMode == 0 ? `No cape ❌` : (capeMode == 1 ? `Cape mode 🥻` : `Elytras mode 🪽`))}`;
                 if(capeMode == 0) {
                   document.getElementById('cape-picker-div').style.display = 'none';
@@ -118,9 +118,9 @@
               updateCape();"></input>
               <label id="cape-text" for="button-toggle-cape" style="margin-bottom: 0px;margin-top: 0px;margin-left: 0px;margin-right: 10px;"> Cape mode 🥻</label>
             </div><br>
-            <fieldset id="cape-picker-div" class="group" style="display: none;padding: 5px 15px 5px 15px;margin: 0px 85px 0px 85px;"> 
+            <fieldset id="cape-picker-div" class="group" style="padding: 5px 15px 5px 15px;margin: 0px 85px 0px 85px;"> 
               Pick your cape:<br>
-              <div id="cape-picker" style="width: 50%;display: flex;font-size: 15px;font-family: MinecraftBold;margin: 0px 2px 2px 2px;padding: 5px 10px 5px 10px;">
+              <div id="cape-picker" class="group button-container" style="display: grid;grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));gap: 10px;width: 100%;display: flex;font-size: 15px;font-family: MinecraftBold;margin: 0px 2px 2px 2px;padding: 5px 10px 5px 10px;">
               </div>
             </fieldset>
             Speed: 
@@ -133,7 +133,7 @@
                 document.getElementById('speed').innerText = Math.min(100,parseInt(+document.getElementById('speed').innerText * 10) + ((event.altKey ||  event.shiftKey) ? 2 : 1)) / 10;
             }
             modify(event);updateSpeed();">⯈</button><br>
-            Pause/Unpause: <button id="control2" class="button-small" style="padding-bottom: 5px;width: 50px;height: 50px;font-size: 30px;display: inline;margin: 10px;vertical-align: middle" onclick="function modify(event) {
+            Pause/Unpause animation: <button id="control2" class="button-small" style="padding-bottom: 5px;width: 50px;height: 50px;font-size: 30px;display: inline;margin: 10px;vertical-align: middle" onclick="function modify(event) {
                 if(skinViewer.animation.paused) {
                   skinViewer.animation.paused = false;
                   document.getElementById('control1').innerText = '⏸︎';
@@ -147,8 +147,8 @@
             };
             modify(event);">⏸︎</button>
             <br>
-            Start recording: <button id="control2" class="button-small" style="padding-bottom: 5px;width: 50px;height: 50px;font-size: 30px;display: inline;margin: 10px;vertical-align: middle" onclick="startRecording()">🔴</button>
-            Stop recording: <button id="control2" class="button-small" style="padding-bottom: 5px;width: 50px;height: 50px;font-size: 30px;display: inline;margin: 10px;vertical-align: middle" onclick="stopRecording()">⏸︎</button>
+            <!-- Start recording: <button id="control2" class="button-small" style="padding-bottom: 5px;width: 50px;height: 50px;font-size: 30px;display: inline;margin: 10px;vertical-align: middle" onclick="startRecording()">🔴</button>
+            Stop recording: <button id="control2" class="button-small" style="padding-bottom: 5px;width: 50px;height: 50px;font-size: 30px;display: inline;margin: 10px;vertical-align: middle" onclick="stopRecording()">⏸︎</button> -->
             <fieldset class="group" style="padding: 0px 15px 0px 15px;margin: 0px 10px 0px 10px;"> 
                 <legend id="thelegend">&nbsp;&nbsp;&nbsp;Skin options 👑&nbsp;&nbsp;&nbsp;</legend>
                     <h2 style="font-size: 25px;">Outer Layer</h2>

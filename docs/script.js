@@ -81,9 +81,9 @@ const availableCapes = {
     image: "https://i.imgur.com/ydrIKpz.png",
     link: "https://i.imgur.com/WjdvpNG.png"
   },
-  "birthday": {
-    name: "Birthday 🎂",
-    image: "https://i.imgur.com/SljUkBN.png",
+  "realmmapmaker": {
+    name: "Realms Mapmaker ⚒️",
+    image: "https://i.imgur.com/sq2ar4P.png",
     link: "https://i.imgur.com/8hTV1YG.png"
   },
   "founder": {
@@ -133,6 +133,7 @@ const availableAnimations = {
 //skinViewer.animation = null;
 let capeMode = 1;
 let backgoundIndex = 0;
+let lastCapeIdentifier;
 function updateSkinRender() {
     let username = document.getElementById("inputText").value
     console.log(`Loading 3D render for: ${username}`);
@@ -142,7 +143,11 @@ function updateCape(capeLink) {
   let capeUrl = "https://crafatar.com/capes/853c80ef3c3749fdaa49938b674adae6";
   if(capeLink) {
     capeUrl = capeLink;
-  } 
+  }else if(typeof lastCapeIdentifier != "undefined") {
+    if(availableCapes[lastCapeIdentifier]) {
+      capeUrl = availableCapes[lastCapeIdentifier].link;
+    }
+  }
   if(capeMode == 0) { //Nothing
     skinViewer.loadCape(null);
   }else if(capeMode == 1) { //Cape
@@ -198,6 +203,7 @@ function updateLandscape() {
 }
 function selectCape(capeType) {
     if(availableCapes[capeType]) {
+        lastCapeIdentifier = capeType;
         updateCape(availableCapes[capeType].link);
         updateSpeed();
         //lockCapes(undefined,5);
@@ -992,7 +998,6 @@ const defaultGradients = {
       }catch(e){}
     }
     setTimeout(()=>{
-      return
       let href = window.location.href;
       if(!href.includes(atob("YWxvbnNvYWxpYWdhLmdpdGh1Yi5pbw=="))) {
         try{document.title = `Page stolen from https://${atob("YWxvbnNvYWxpYWdhLmdpdGh1Yi5pbw==")}`;}catch(e){}
@@ -2334,11 +2339,11 @@ const defaultGradients = {
     for(let capeType of Object.keys(availableCapes)) {
       let capeData = availableCapes[capeType];
       let element = document.createElement("div");
-      element.classList.add("render-card");
-      element.style.minWidth = "fit-content"
+      element.classList.add("render-cape-card");
+      //element.style.minWidth = "fit-content"
       element.style.margin = "2px"
       element.innerHTML = `<img src="${capeData.image}" alt="${capeData.name}">
-                <div style="min-width:fit-content;margin-top:-5px;font-size:15px;font-weight:bold;" class="render-label">${capeData.name}</div>`
+                <div style="display:inline-block;min-width:fit-content;margin-top:-5px;font-size:15px;font-weight:bold;" class="render-label">${capeData.name}</div>`
       element.onclick = function(){selectCape(capeType)}
       if(capeData.custom) {
         toAddCustom.push(element);
