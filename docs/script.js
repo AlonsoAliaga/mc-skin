@@ -2686,6 +2686,7 @@ function loadChecking() {
       card.append(ov);
     }
   }
+  let myTimeout;
   function lockAnimations(btn,secs, iconUrl='https://raw.githubusercontent.com/AlonsoAliaga/mc-renders/main/assets/images/lock-icon.png') {
     let cards = [];
     if(!btn) {
@@ -2818,6 +2819,9 @@ document.addEventListener("DOMContentLoaded", () => {
       loadChecking();
     },10000)
   },2500)
+  setTimeout(()=>{
+    if(typeof window.getRandomStyle == "undefined" && myTimeout == undefined) processAds();
+  },2000)
 });
 function processAds() {
   lockAnimationsWithMessage(adLockedAnimations,`Disable AdBlock to access this animation!`)
