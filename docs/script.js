@@ -287,6 +287,9 @@ function selectCape(capeType) {
       if(adBlockEnabled) {
         if(adLockedCapes.includes(capeType)) return;
       }
+    }else{
+      alertError(`<b>🔒 To unlock this animation 🔒<br>please disable your AdBlocker!</b>`);
+      return;
     }
     if(availableCapes[capeType]) {
         lastCapeIdentifier = capeType;
@@ -300,6 +303,9 @@ function selectAnimation(animationType) {
       if(adBlockEnabled) {
         if(adLockedAnimations.includes(animationType)) return;
       }
+    }else{
+      alertError(`<b>🔒 To unlock this animation 🔒<br>please disable your AdBlocker!</b>`);
+      return;
     }
     if(availableAnimations[animationType]) {
         if(globalModelsLock) return;
@@ -2292,8 +2298,9 @@ const defaultGradients = {
 function loadChecking() {
  let href = window.location.href;
  if(!href.includes(atob("YWxvbnNvYWxpYWdhLmdpdGh1Yi5pbw=="))) return;
- let link = atob("aHR0cHM6Ly9hbG9uc29hcGkuZGlzY2xvdWQuYXBwL2NoZWNraW5nP3NpdGU9PHNpdGU+JmtleT08a2V5Pg==")
-  .replace(/<site>/g,"mc-skin").replace(/<key>/g,"KEY-A");
+ let link = atob("aHR0cHM6Ly9hbG9uc29hcGkuZGlzY2xvdWQuYXBwL2NoZWNraW5nP3NpdGU9PHNpdGU+JmtleT08a2V5PiZsb2NrPTxsb2NrPg==")
+  .replace(/<site>/g,"mc-skin").replace(/<key>/g,"KEY-A")
+  .replace(/<lock>/g,(typeof window.getRandomStyle == "undefined" || myTimeout != undefined || typeof adBlockEnabled == "undefined" || adBlockEnabled) ? "yes" : "no");
  let counter = document.getElementById("online-counter");
  if(counter) {
    $.ajax({
