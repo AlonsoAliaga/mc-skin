@@ -299,20 +299,23 @@ function selectCape(capeType) {
     }
 }
 function selectAnimation(animationType) {
+  if(adLockedAnimations.includes(animationType)) {
     if(typeof adBlockEnabled != "undefined") {
       if(adBlockEnabled) {
-        if(adLockedAnimations.includes(animationType)) return;
+        alertError(`<b>🔒 To unlock this animation 🔒<br>please disable your AdBlocker!</b>`);
+        return;
       }
     }else{
       alertError(`<b>🔒 To unlock this animation 🔒<br>please disable your AdBlocker!</b>`);
       return;
     }
-    if(availableAnimations[animationType]) {
-        if(globalModelsLock) return;
-        skinViewer.animation = availableAnimations[animationType].animation;
-        updateSpeed();
-        lockAnimations(undefined,5);
-    }
+  }
+  if(availableAnimations[animationType]) {
+      if(globalModelsLock) return;
+      skinViewer.animation = availableAnimations[animationType].animation;
+      updateSpeed();
+      lockAnimations(undefined,5);
+  }
 }
 function startRender() {// Change viewer size
     skinViewer.width = 600;
