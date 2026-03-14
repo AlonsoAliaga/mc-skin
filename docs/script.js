@@ -356,7 +356,11 @@ function startRender() {// Change viewer size
     selectAnimation("run");
     
     // Set the speed of the animation
-    updateSpeed();
+    try{
+      updateSpeed();
+    }catch(e){
+      console.log(e.message)
+    }
     
     // Pause the animation
     skinViewer.animation.paused = false;
