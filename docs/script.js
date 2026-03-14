@@ -353,7 +353,7 @@ function startRender() {// Change viewer size
     //skinViewer.autoRotate = false;
     
     // Apply an animation
-    selectAnimation("run");
+    selectAnimation("walk");
     
     // Set the speed of the animation
     try{
@@ -361,9 +361,13 @@ function startRender() {// Change viewer size
     }catch(e){
       console.log(e.message)
     }
-    
+
     // Pause the animation
-    skinViewer.animation.paused = false;
+    try{
+      skinViewer.animation.paused = false;
+    }catch(e){
+      console.log(e.message)
+    }
 }
 
 
