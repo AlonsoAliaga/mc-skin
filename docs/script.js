@@ -221,7 +221,7 @@ function updateSkinRender() {
     skinViewer.loadSkin(`https://mc-heads.net/skin/${username}.png`);
 }
 function updateCape(capeLink) {
-  let capeUrl = "https://crafatar.com/capes/853c80ef3c3749fdaa49938b674adae6";
+  let capeUrl = "https://api.capes.dev/img/bf9374e841d9f3e1009674d69ef165895febabc1df2c58c6331d0df9ba788fb90df97d3c90e87326a332d2376e40a6679f4d0f621b07458bb0eb0a9baa1008bb";
   if(capeLink) {
     capeUrl = capeLink;
   }else if(typeof lastCapeIdentifier != "undefined") {
@@ -2833,4 +2833,5 @@ document.addEventListener("DOMContentLoaded", () => {
 function processAds() {
   lockAnimationsWithMessage(adLockedAnimations,`Disable AdBlock to access this animation!`)
   lockCapesWithMessage(adLockedCapes,`Disable AdBlock to access this cape!`)
+  minecraft();
 }
