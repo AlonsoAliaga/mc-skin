@@ -2820,7 +2820,6 @@ function loadPage() {
         }
     },2500);
 }
-startRender();
 //updateRenderTest("AlonsoAliaga")
 loadAnimations();
 loadCapes();
@@ -2843,3 +2842,4 @@ function processAds() {
   lockCapesWithMessage(adLockedCapes,`Disable AdBlock to access this cape!`)
   minecraft();
 }
+startRender();
