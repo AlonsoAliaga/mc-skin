@@ -5,7 +5,7 @@ let skinViewer = new skinview3d.SkinViewer({
     //skin: "img/skin.png"
 });
 let adLockedAnimations = ["run","crouch","fly"];
-let adLockedCapes = ["15th","mcchampionship","million","minecraftexperience","snowman","home"];
+let adLockedCapes = ["15th","mcchampionship","million","mojangstudios","mojang","minecraftexperience","snowman","home","mojiramoderator","translator","valentine","firedragon","follower","zombiehorse"];
 const skinParts = ["head", "body", "rightArm", "leftArm", "rightLeg", "leftLeg"];
 const skinPartsName = {
     "head":"Head",
@@ -171,6 +171,26 @@ const availableCapes = {
     name: "Minecraft Experience 🧪",
     image: "https://i.imgur.com/uWGmRsR.png",
     link: "https://i.imgur.com/W56Bc9c.png"
+  },
+  "valentine": {
+    name: "Valentine ♥️",
+    image: "https://i.imgur.com/lg57vaM.png",
+    link: "https://i.imgur.com/SUGAWET.png"
+  },
+  "follower": {
+    name: "TikTok Creeper 📱",
+    image: "https://i.imgur.com/yFyGqs9.png",
+    link: "https://i.imgur.com/uxilD1Q.png"
+  },
+  "zombiehorse": {
+    name: "Zombie Horse 🧟",
+    image: "https://i.imgur.com/uBd98en.png",
+    link: "https://i.imgur.com/vu7w8ua.png"
+  },
+  "firedragon": {
+    name: "Fire Dragon 🐲",
+    image: "https://i.imgur.com/YfGiylI.png",
+    link: "https://i.imgur.com/XHa4u5f.png"
   },
 }
 const availableAnimations = {
