@@ -308,20 +308,23 @@ function updateLandscape() {
     }
 }
 function selectCape(capeType) {
+  if(adLockedCapes.includes(capeType)) {
     if(typeof adBlockEnabled != "undefined") {
       if(adBlockEnabled) {
-        if(adLockedCapes.includes(capeType)) return;
+        alertError(`<b>🔒 To unlock this cape 🔒<br>please disable your AdBlocker!</b>`);
+        return;
       }
     }else{
-      alertError(`<b>🔒 To unlock this animation 🔒<br>please disable your AdBlocker!</b>`);
+      alertError(`<b>🔒 To unlock this cape 🔒<br>please disable your AdBlocker!</b>`);
       return;
     }
-    if(availableCapes[capeType]) {
-        lastCapeIdentifier = capeType;
-        updateCape(availableCapes[capeType].link);
-        updateSpeed();
-        //lockCapes(undefined,5);
-    }
+  }
+  if(availableCapes[capeType]) {
+      lastCapeIdentifier = capeType;
+      updateCape(availableCapes[capeType].link);
+      updateSpeed();
+      //lockCapes(undefined,5);
+  }
 }
 function selectAnimation(animationType) {
   if(adLockedAnimations.includes(animationType)) {
