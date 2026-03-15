@@ -67,6 +67,11 @@ const backgrounds = {
 }
 const skinLayers = ["innerLayer", "outerLayer"];
 const availableCapes = {
+  "developer": {
+    name: "Developer Cape 👑",
+    image: "https://i.imgur.com/x1JjuPJ.png",
+    link: "https://i.imgur.com/yK7wKGi.png"
+  },
   "15th": {
     name: "15th Anniversary 🎂",
     image: "https://i.imgur.com/nrZ43ye.png",
@@ -190,7 +195,7 @@ const availableCapes = {
   "firedragon": {
     name: "Fire Dragon 🐲",
     image: "https://i.imgur.com/YfGiylI.png",
-    link: "https://i.imgur.com/XHa4u5f.png"
+    link: "https://i.imgur.com/9JV9lnm.png"
   },
 }
 const availableAnimations = {
